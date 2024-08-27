@@ -3,137 +3,872 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K66 Công nghệ quan trắc</title>
+    <title data-translate="title">TLD66 - Technology Leading to Discovery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha384-gZ3mC7EJGpe4g0fH26mk2raVScTR3+/wD8/wJkcnExZZwodkL1Xb0xnL0IisveU0" crossorigin=""/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha384-uUlWqr9qU6wI1e2jGncvBa/pft3o9tPvzL+nTBGOZTLuwO7lUp2VkGH5NZUJc9Ix" crossorigin=""></script>
 </head>
 <body>
+    <div id="notificationBar" class="bg-success text-white text-center p-2">
+        Phiên bản cập nhật ngày 22/08/2024.
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="dismissNotification()" style="float: right; margin-right: 20px;"></button>
+    </div>
+
+    <script>
+        function dismissNotification() {
+            document.getElementById('notificationBar').style.display = 'none';
+        }
+
+        function loadNotification() {
+            const savedNotification = localStorage.getItem('notificationContent');
+            if (savedNotification) {
+                // Cập nhật nội dung của notificationBar
+                document.getElementById('notificationBar').childNodes[0].textContent = savedNotification;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadNotification);
+    </script>
+    <script>
+        const translations = {
+            vi: {
+                title: "TLD66 - Technology Leading to Discovery",
+                notification: "Phiên bản cập nhật ngày 22/08/2024. Sẽ có những nâng cấp trong thời gian tới.",
+                home: "Trang chủ",
+                realtimeData: "Thông số thời gian thực",
+                dataStatistics: "Dữ liệu & thống kê",
+                feedback: "Góp ý & nhận xét",
+                login: "Đăng nhập",
+                signup: "Đăng ký nhận thông tin qua email",
+                aboutHeader: "Cảm biến nhiệt độ & độ ẩm",
+                contactInfo: "Thông tin hỗ trợ",
+                phone: "Số điện thoại",
+                email: "Email",
+                language: "Ngôn ngữ",
+                mapTitle: "Bản đồ giám sát chất lượng không khí",
+                latestDataTitle: "THÔNG TIN DỮ LIỆU MỚI NHẤT",
+                pollutionLevelsTitle: "Các cấp độ ô nhiễm không khí",
+                pollutionAmount: "Hàm lượng",
+                pollutionLevel: "Cấp độ",
+                pollutionQuality: "Chất lượng không khí",
+                qualityGood: "Tốt",
+                qualityModerate: "Vừa phải",
+                qualityUnhealthy: "Kém",
+                qualityVeryUnhealthy: "Rất kém",
+                dataSectionTitle: "Dữ liệu quan trắc chất lượng không khí",
+                dataSectionSubtitle: "Dữ liệu được cập nhật từ thiết bị TLD66",
+                chartSectionTitle: "Biểu đồ giám sát chất lượng không khí",
+                webUsageGuideTitle: "Tài liệu sử dụng web",
+                codeDocumentTitle: "Tài liệu mã code",
+                researchTitle: "Nghiên cứu",
+                teamSectionTitle: "Nhóm nghiên cứu gồm:",
+                teamMembersSubtitle: "Các thành viên chính",
+                member1Name: "Thái Văn Đức",
+                member2Name: "Nguyễn Khánh Linh",
+                member3Name: "Giang Ngọc Thảo",
+                coSensorHeader: "Cảm biến hàm lượng khí CO",
+                airQualitySensorHeader: "Cảm biến đo chất lượng khí",
+                fineDustSensorHeader: "Cảm biến đo hàm lượng bụi mịn",
+                environmentInfoTitle: "Thông tin chất lượng môi trường không khí",
+                dht22Description: "Cảm biến độ ẩm và nhiệt độ DHT22 sử dụng giao tiếp 1 Wire dễ dàng kết nối với Vi điều khiển để thực hiện các ứng dụng đo nhiệt độ, độ ẩm môi trường, cảm biến có chất lượng tốt, kích thước nhỏ gọn, độ bền và độ ổn định cao.",
+                dht22LinkText: "xem chi tiết tại đây",
+                coSensorDescription: "Cảm biến khí CO MQ-7 là cảm biến bán dẫn giá rẻ có khả năng phát hiện khí carbon monoxide từ 10 đến 1000 ppm. Vật liệu tạo ra cảm biến là từ SnO2, có độ dẫn điện thấp trong không khí sạch.",
+                coSensorLinkText: "xem chi tiết tại đây",
+                sds011Description: "SDS011 là cảm biến đo chất lượng không khí có thể phát hiện các hạt bụi và nồng độ khói trong không khí. Nó có thể đo nồng độ các hạt bụi có kích thước từ 0.3 đến 10um.",
+                sds011LinkText: "xem chi tiết tại đây",
+                sharpDustSensorDescription: "Cảm biến dùng để nhận biết nồng độ bụi trong không khí. Nguyên lý hoạt động dựa trên led phát hồng ngoại trong cảm biến, khi có bụi vào sẽ bị khúc xạ, làm giảm cường độ tia hồng ngoại dẫn đến điện áp thay đổi.",
+                sharpDustSensorLinkText: "xem chi tiết tại đây",
+                "signup": "Đăng ký nhận thông tin qua email",
+                "emailAddress": "Địa chỉ Email",
+                "fullName": "Họ và tên",
+                "phoneNumber": "Số điện thoại",
+                "useData": "Bạn có muốn sử dụng dữ liệu?",
+                "yes": "Có",
+                "no": "Không",
+                "usagePurpose": "Mục đích sử dụng",
+                "signup": "Đăng ký",
+                "password": "Mật khẩu",
+                "passwordPlaceholder": "Nhập mật khẩu",
+                 note: "Chú ý: Dữ liệu dựa trên sản phẩm thử nghiệm TLD 66 của nhóm sinh viên Khoa Địa Chất, Trường ĐH KHTN - ĐHQG HN KHÔNG THAY THẾ CHO CÁC THÔNG SỐ CHÍNH THỨC CỦA CƠ QUAN NHÀ NƯỚC VỀ ĐÁNH GIÁ CHẤT LƯỢNG KHÔNG KHÍ"
+            },
+            en: {
+                title: "TLD66 - Technology Leading to Discovery",
+                notification: "Version updated on 22/08/2024. More upgrades will come soon.",
+                home: "Home",
+                realtimeData: "Real-time Data",
+                dataStatistics: "Data & Statistics",
+                feedback: "Feedback",
+                login: "Login",
+                signup: "Sign up for updates via email",
+                aboutHeader: "Temperature & Humidity Sensor",
+                contactInfo: "Support Information",
+                phone: "Phone",
+                email: "Email",
+                language: "Language",
+                mapTitle: "Air Quality Monitoring Map",
+                latestDataTitle: "LATEST DATA INFORMATION",
+                pollutionLevelsTitle: "Air Pollution Levels",
+                pollutionAmount: "Amount",
+                pollutionLevel: "Level",
+                pollutionQuality: "Air Quality",
+                qualityGood: "Good",
+                qualityModerate: "Moderate",
+                qualityUnhealthy: "Unhealthy",
+                qualityVeryUnhealthy: "Very Unhealthy",
+                dataSectionTitle: "Air Quality Monitoring Data",
+                dataSectionSubtitle: "Data updated from TLD66 device",
+                chartSectionTitle: "Air Quality Monitoring Chart",
+                webUsageGuideTitle: "Web Usage Guide",
+                codeDocumentTitle: "Code Document",
+                researchTitle: "Research",
+                teamSectionTitle: "Research Team Includes:",
+                teamMembersSubtitle: "Main members",
+                member1Name: "Thái Văn Đức",
+                member2Name: "Nguyễn Khánh Linh",
+                member3Name: "Giang Ngọc Thảo",
+                coSensorHeader: "CO Gas Sensor",
+                airQualitySensorHeader: "Air Quality Sensor",
+                fineDustSensorHeader: "Fine Dust Sensor",
+                environmentInfoTitle: "Air Quality Monitoring Information",
+                dht22Description: "The DHT22 Temperature Humidity Sensor uses 1-Wire communication, making it easy to connect and communicate with microcontrollers for temperature and humidity measurement applications. The sensor has good quality, compact size, high durability, and stability.",
+                dht22LinkText: "see details here",
+                coSensorDescription: "The CO MQ-7 sensor is a low-cost semiconductor sensor capable of detecting carbon monoxide with concentrations ranging from 10 to 1000 ppm. The sensor material is made of SnO2, which has low conductivity in clean air.",
+                coSensorLinkText: "see details here",
+                sds011Description: "The SDS011 is an air quality sensor that can be used to detect dust particles and smoke concentration in the air. More precisely, it can measure the concentration of particulate matter (PM) in the air. It can detect particle concentrations ranging from 0.3 to 10um.",
+                sds011LinkText: "see details here",
+                sharpDustSensorDescription: "The sensor is used to detect dust concentration in the air. The working principle is based on an infrared LED emitted within the sensor. When dust enters, it scatters the light, reducing the intensity of the infrared beam, which leads to a change in voltage.",
+                sharpDustSensorLinkText: "see details here",
+                "signup": "Sign up for updates via email",
+                "emailAddress": "Email Address",
+                "fullName": "Full Name",
+                "phoneNumber": "Phone Number",
+                "useData": "Would you like to use data?",
+                "yes": "Yes",
+                "no": "No",
+                "usagePurpose": "Usage Purpose",
+                "signup": "Sign up for updates via email",
+                 "password": "Password",
+                 "passwordPlaceholder": "Enter your password",
+                 note: "Note: The data is based on the experimental product TLD 66 by students of the Geology Department, University of Science, VNU HN, and DOES NOT REPLACE OFFICIAL PARAMETERS FROM STATE AGENCIES FOR AIR QUALITY ASSESSMENT."
+            }
+        };
+
+        function setLanguage(language) {
+            localStorage.setItem('language', language);
+            updateContent(language);
+        }
+
+        function updateContent(language) {
+            document.querySelectorAll("[data-translate]").forEach(element => {
+                const key = element.getAttribute("data-translate");
+                element.textContent = translations[language][key] || element.textContent;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const language = localStorage.getItem('language') || 'vi';
+            updateContent(language);
+        });
+    </script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><span class="text-success">K66</span>CNQT</a>
+            <a class="navbar-brand" href="#">
+                <img src="img/Logo1.png" alt="" style="height: 150px;">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Trang chủ</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="language">
+                        Ngôn ngữ
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="setLanguage('vi')">Tiếng Việt</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a></li>
+                    </ul>
+                    <script>
+                        document.getElementById('vi').addEventListener('click', function () {
+                            localStorage.setItem('language', 'vi');
+                            window.location.href = 'data.html'; // Redirect to data.html after setting the language
+                        });
+                
+                        document.getElementById('en').addEventListener('click', function () {
+                            localStorage.setItem('language', 'en');
+                            window.location.href = 'data.html'; // Redirect to data.html after setting the language
+                        });
+                
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const language = localStorage.getItem('language') || 'vi';
+                            if (language === 'en') {
+                                document.getElementById('en').classList.add('active');
+                            } else {
+                                document.getElementById('vi').classList.add('active');
+                            }
+                        });
+                    </script>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://script.google.com/macros/s/AKfycbxypKpWoIb8oYujhzz9yjtdHaxOdScEKFOadjERMfmb0qqOBdFaAPKgzEnnAkgSL9c1/exec">Thông số thời gian thực</a>
+                    <a class="nav-link" href="#" data-translate="home">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="authenticate()">Trích suất kết quả đo</a>
+                    <a class="nav-link" href="https://script.google.com/macros/s/AKfycbxypKpWoIb8oYujhzz9yjtdHaxOdScEKFOadjERMfmb0qqOBdFaAPKgzEnnAkgSL9c1/exec" data-translate="realtimeData">Thông số thời gian thực</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe0Zrll8kyemYWhAIPpTdnKahBHg-eKu1UOXxXvGQqIxun0aQ/viewform" target="_blank">Góp ý & nhận xét</a>
+                    <a class="nav-link" href="#" onclick="showLoginModal()" data-translate="dataStatistics">Dữ liệu & thống kê</a>
+                </li>
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel" data-translate="login">Đăng nhập</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="loginForm">
+                          <div class="mb-3">
+                            <label for="loginID" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="loginID" placeholder="Nhập ID">
+                          </div>
+                          <div class="mb-3">
+                            <label for="loginPassword" class="form-label" data-translate="password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu" data-translate="passwordPlaceholder">
+                        </div>                        
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="cancel">Hủy</button>
+                            <button type="submit" class="btn btn-primary" data-translate="login">Đăng nhập</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                    let isLoggedIn = false;
+
+                    function showLoginModal() {
+                        if (isLoggedIn) {
+                            window.location.href = "results.htm";
+                        } else {
+                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                            loginModal.show();
+                        }
+                    }
+
+                    document.getElementById('loginForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        const id = document.getElementById('loginID').value;
+                        const pass = document.getElementById('loginPassword').value;
+
+                        if (id === "K66CNQT" && pass === "Khoadiachat") {
+                            isLoggedIn = true;
+                            document.getElementById('loginModal').addEventListener('hidden.bs.modal', function () {
+                                window.location.href = "results.htm";
+                            });
+                            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                            loginModal.hide();
+                        } else {
+                            alert("ID hoặc mật khẩu không đúng. Vui lòng thử lại.");
+                        }
+                    });
+                </script>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe0Zrll8kyemYWhAIPpTdnKahBHg-eKu1UOXxXvGQqIxun0aQ/viewform" target="_blank" data-translate="feedback">Góp ý & nhận xét</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-translate="login">Đăng nhập</a>
                 </li>
+                <li class="nav-item">
+                    <a id="showFormButton" class="nav-link" href="#" data-translate="signup">Đăng ký nhận thông tin qua email</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
+                        <i class="bi bi-person-lock"></i> Admin
+                    </a>
+                </li>
+                </ul>
+        
+                <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="emailModalLabel" data-translate="signup">Sign up for updates via email</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="emailForm">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label" data-translate="emailAddress">Email Address</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fullName" class="form-label" data-translate="fullName">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label" data-translate="phoneNumber">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="useData" class="form-label" data-translate="useData">Would you like to use data?</label>
+                                        <select class="form-control" id="useData" name="useData" required>
+                                            <option value="Có" data-translate="yes">Yes</option>
+                                            <option value="Không" data-translate="no">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="purpose" class="form-label" data-translate="usagePurpose">Usage Purpose</label>
+                                        <input type="text" class="form-control" id="purpose" name="purpose" placeholder="Enter your usage purpose" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" data-translate="signup">Sign up</button>
+                                </form>
+                                <div id="responseMessage" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <script>
+                    document.getElementById('showFormButton').addEventListener('click', function(e) {
+                        e.preventDefault(); 
+                        var emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+                        emailModal.show();
+                    });
+
+                    document.getElementById('emailForm').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const email = document.getElementById('email').value;
+                        const fullName = document.getElementById('fullName').value;
+                        const phone = document.getElementById('phone').value;
+                        const purpose = document.getElementById('purpose').value;
+                        const useData = document.getElementById('useData').value;
+                        const responseMessage = document.getElementById('responseMessage');
+
+                        fetch('https://script.google.com/macros/s/AKfycbzO59uzW_SRDZ9WvQfczABsSGr2fIVZwqL-cXOPmg-b4isqZsrd8zTPCzcKfvbxxe52/exec', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `email=${encodeURIComponent(email)}&fullName=${encodeURIComponent(fullName)}&phone=${encodeURIComponent(phone)}&purpose=${encodeURIComponent(purpose)}&useData=${encodeURIComponent(useData)}`
+                        });
+
+                        responseMessage.textContent = "Đã ghi nhận đăng ký của bạn!";
+                        responseMessage.classList.add('text-success');
+
+                        document.getElementById('emailForm').reset();
+                        setTimeout(() => {
+                            var emailModal = bootstrap.Modal.getInstance(document.getElementById('emailModal'));
+                            emailModal.hide();
+                            responseMessage.textContent = ""; // Xóa thông báo
+                        }, 2000);
+                    });
+                </script>
+                <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="adminLoginModalLabel">Đăng nhập Admin</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="adminLoginForm">
+                                    <div class="mb-3">
+                                        <label for="adminID" class="form-label">ID Admin</label>
+                                        <input type="text" class="form-control" id="adminID" placeholder="Nhập ID">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="adminPassword" class="form-label">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="adminPassword" placeholder="Nhập mật khẩu">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    let isAdminLoggedIn = false;
+                
+                    const validAdmins = {
+                        "DucQT": "Ducdeptrai",
+                        "GTQT": "GT66",
+                        "KLQT": "KL66",
+                        "Thaydung": "thaydung"
+                    };
+                
+                    document.getElementById('adminLoginForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+                
+                        const adminID = document.getElementById('adminID').value;
+                        const adminPassword = document.getElementById('adminPassword').value;
+                        if (validAdmins[adminID] && validAdmins[adminID] === adminPassword) {
+                            isAdminLoggedIn = true;
+                            document.getElementById('adminLoginModal').addEventListener('hidden.bs.modal', function () {
+                                window.location.href = "admin_dashboard.htm"; // Chuyển đến trang admin dashboard
+                            });
+                            const adminLoginModal = bootstrap.Modal.getInstance(document.getElementById('adminLoginModal'));
+                            adminLoginModal.hide();
+                        } else {
+                            alert("ID hoặc mật khẩu không đúng. Vui lòng thử lại.");
+                        }
+                    });
+                </script>                
             </ul>
         </div>
     </nav>
-
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Đăng nhập</h5>
+                    <h5 class="modal-title" id="loginModalLabel" data-translate="login">Đăng nhập</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="loginForm">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <label for="username" class="form-label" data-translate="login">Tên đăng nhập</label>
                             <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
                             <div id="usernameHelp" class="form-text">Nhập tên đăng nhập của bạn</div>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Mật khẩu</label>
+                            <label for="password" class="form-label" data-translate="login">Mật khẩu</label>
                             <input type="password" class="form-control" id="password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                        <button type="submit" class="btn btn-primary" data-translate="login">Đăng nhập</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-        <section id="about" class="about-section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <div class="about-img">
-                            <img src="img/dht22.jpg" alt="" class="img-fluid">
-                        </div>
+    
+    
+    <section id="map-section" class="map-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text-center pb-5">
+                        <h1 data-translate="mapTitle">Bản đồ giám sát chất lượng không khí</h1>
                     </div>
-                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                        <div class="about-text">
-                            <h2> <span class="text-success">Cảm biến nhiệt độ & độ ẩm </span> <br> DHT22</h2>
-                            <p>
-                                Cảm biến độ ẩm và nhiệt độ DHT22 Temperature Humidity Sensor sử dụng giao tiếp 1 Wire dễ dàng kết nối và giao tiếp với Vi điều khiển để thực hiện các ứng dụng đo nhiệt độ, độ ẩm môi trường, cảm biến có chất lượng tốt, kích thước nhỏ gọn, độ bền và độ ổn định cao.
-                                <a href="tailieu/dht_document (1).pdf"target="_blank">xem chi tiết tại đây</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <div class="about-img">
-                            <img src="img/MQ-7.jpg" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                        <div class="about-text">
-                            <h2> <span class="text-success">Cảm biến hàm lượng khí CO </span> <br> MQ-7</h2>
-                            <p>
-                                Cảm biến khí CO MQ-7 là cảm biến bán dẫn có giá rẻ có khả năng phát hiện khí carbon monoxide có nồng độ từ 10 đến 1000 ppm. Vật liệu tạo ra cảm biến là từ chất SnO2, có độ dẫn điện thấp trong không khí sạch.
-                                <a href="https://www.instructables.com/Arduino-CO-Monitor-Using-MQ-7-Sensor/"target="_blank">xem chi tiết tại đây</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <div class="about-img">
-                            <img src="img/SDS011(1).jpg" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                        <div class="about-text">
-                            <h2> <span class="text-success">Cảm biến đo chất lượng khí</span> <br> Nova PM SDS011</h2>
-                            <p>
-                                SDS011 là cảm biến đo chất lượng không khí có thể được sử dụng để phát hiện các hạt bụi và nồng độ khói trong không khí. Chính xác hơn, nó có thể đo nồng độ vật chất dạng hạt (MP) trong không khí. 
-Nó có thể phát hiện nồng độ các hạt bụi có kích thước từ 0.3 đến 10um. Quan trọng nhất, cảm biến bụi Nova PM khả năng vận hành bộ ngắt khi nồng độ hạt bụi thay đổi và thời gian phản hồi dưới 10 giây. 
-                                <a href="SDS011-DATASHEET.pdf"target="_blank">xem chi tiết tại đây</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <div class="about-img">
-                            <img src="img/sharp.jpg" alt="" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                        <div class="about-text">
-                            <h2> <span class="text-success">Cảm biến đo hàm lượng bụi mịn</span> <br> SHARP GP2Y1010AU0F</h2>
-                            <p>
+                </div>
+                <div class="col-md-12">
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lpUVLVcLy7gPa0gYQgH9VLoWZED53P0&callback=initMap" async defer></script>
+    <script>
+        let map, marker, infowindow, environmentChart;
 
-                                Cảm biến dùng để nhận biết nồng độ bụi trong không khí. Nguyên lý hoạt động dựa trên led phát hồng ngoại trong cảm biến, khi có bụi vào sẽ bị khúc xạ, làm giảm cường độ tia hồng ngoại dẫn đến điện áp thay đổi
-                                <a href="tailieu/gp2y1010au_e.pdf"target="_blank">xem chi tiết tại đây</a>
-                            </p>
-                        </div>
+        // Khởi tạo bản đồ
+        function initMap() {
+            const lat = parseFloat(localStorage.getItem('mapLat')) || 20.99567;
+            const lng = parseFloat(localStorage.getItem('mapLng')) || 105.80676;
+            const title = localStorage.getItem('mapTitle') || 'Trường ĐH Khoa học Tự nhiên, ĐHQG HN';
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: lat, lng: lng}
+            });
+
+            marker = new google.maps.Marker({
+                position: {lat: lat, lng: lng},
+                map: map,
+                icon: getMarkerIcon(0),  
+                title: title
+            });
+
+            infowindow = new google.maps.InfoWindow({
+                content: `<h3>${title}</h3>`
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+
+            setInterval(updateInfoWindow, 30000); 
+        }
+        function getMarkerIcon(pm25) {
+            if (pm25 <= 12) {
+                return "https://maps.google.com/mapfiles/ms/icons/green-dot.png"; // Tốt
+            } else if (pm25 <= 35) {
+                return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; // Vừa phải
+            } else if (pm25 <= 55) {
+                return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png"; // Có hại cho sức khỏe
+            } else {
+                return "https://maps.google.com/mapfiles/ms/icons/red-dot.png"; 
+            }
+        }
+        function updateInfoWindow() {
+            const latestData = getLatestDataFromDOM();
+
+            const contentString = `
+                <h3>Trường ĐH Khoa học Tự nhiên, ĐHQG HN</h3>
+                <p data-translate="date">Ngày: ${latestData.date}</p>
+                <p data-translate="time">Giờ: ${latestData.time}</p>
+                <p data-translate="temperature">Nhiệt độ: ${latestData.temperature} °C</p>
+                <p data-translate="humidity">Độ ẩm: ${latestData.humidity} %</p>
+                <p data-translate="co">CO: ${latestData.co} ppm</p>
+                <p data-translate="pm25">PM2.5: ${latestData.pm25} µg/m³</p>
+            `;
+
+            infowindow.setContent(contentString);
+            marker.setIcon(getMarkerIcon(latestData.pm25));
+            infowindow.open(map, marker);
+        }
+        function getLatestDataFromDOM() {
+            const date = document.getElementById('latestDate') ? document.getElementById('latestDate').textContent : 'Không có dữ liệu';
+            const time = document.getElementById('latestTime') ? document.getElementById('latestTime').textContent : 'Không có dữ liệu';
+            const temperature = document.getElementById('latestTemperature') ? parseFloat(document.getElementById('latestTemperature').textContent) : 0;
+            const humidity = document.getElementById('latestHumidity') ? parseFloat(document.getElementById('latestHumidity').textContent) : 0;
+            const co = document.getElementById('latestCO') ? parseFloat(document.getElementById('latestCO').textContent) : 0;
+            const pm25 = document.getElementById('latestPM25') ? parseFloat(document.getElementById('latestPM25').textContent) : 0;
+
+            return { date, time, temperature, humidity, co, pm25 };
+        }
+        function displayData(data) {
+            const container = document.getElementById('data-container');
+            container.innerHTML = `
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title" data-translate="environmentInfoTitle">Thông tin chất lượng môi trường không khí</h5>
+                        <p class="card-text" data-translate="date">Ngày: ${data[0]}</p>
+                        <p class="card-text" data-translate="time">Giờ: ${data[1]}</p>
+                        <p class="card-text" data-translate="temperature">Nhiệt độ: ${data[2] ? data[2] : 'Không có dữ liệu'} °C</p>
+                        <p class="card-text" data-translate="humidity">Độ ẩm: ${data[3] ? data[3] : 'Không có dữ liệu'} %</p>
+                        <p class="card-text" data-translate="co">CO: ${data[4] ? data[4] : 'Không có dữ liệu'} ppm</p>
+                        <p class="card-text" data-translate="pm25">PM2.5: ${data[5] ? data[5] : 'Không có dữ liệu'} µg/m³</p>
                     </div>
-                    <div>
-                        <p></p>
+                </div>
+            `;
+            updateInfoWindow({
+                date: data[0],
+                time: data[1],
+                temperature: parseFloat(data[2]) || 'Không có dữ liệu',
+                humidity: parseFloat(data[3]) || 'Không có dữ liệu',
+                co: parseFloat(data[4]) || 'Không có dữ liệu',
+                pm25: parseFloat(data[5]) || 'Không có dữ liệu',
+            });
+        }
+        
+        function updateInfoWindow(latestData) {
+            const contentString = `
+                <h3>Trường ĐH Khoa học Tự nhiên, ĐHQG HN</h3>
+                <p data-translate="date">Ngày: ${latestData.date}</p>
+                <p data-translate="time">Giờ: ${latestData.time}</p>
+                <p data-translate="temperature">Nhiệt độ: ${latestData.temperature} °C</p>
+                <p data-translate="humidity">Độ ẩm: ${latestData.humidity} %</p>
+                <p data-translate="co">CO: ${latestData.co} ppm</p>
+                <p data-translate="pm25">PM2.5: ${latestData.pm25} µg/m³</p>
+            `;
+        
+            infowindow.setContent(contentString);
+            marker.setIcon(getMarkerIcon(latestData.pm25));
+            infowindow.open(map, marker);
+        }
+        
+        function getMarkerIcon(pm25) {
+            if (pm25 <= 12) {
+                return "https://maps.google.com/mapfiles/ms/icons/green-dot.png"; // Tốt
+            } else if (pm25 <= 35) {
+                return "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; // Vừa phải
+            } else if (pm25 <= 55) {
+                return "https://maps.google.com/mapfiles/ms/icons/orange-dot.png"; // Kém
+            } else {
+                return "https://maps.google.com/mapfiles/ms/icons/red-dot.png"; // Rất kém
+            }
+        }       
+        function updateChart(recentData) {
+            const labels = recentData.map(row => row[1]);
+            const temperatureData = recentData.map(row => parseFloat(row[2] || 0));
+            const humidityData = recentData.map(row => parseFloat(row[3] || 0));
+            const coData = recentData.map(row => parseFloat(row[4] || 0));
+            const pm25Data = recentData.map(row => parseFloat(row[5] || 0));
+
+            if (!environmentChart) {
+                const ctx = document.getElementById('environmentChart').getContext('2d');
+                environmentChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Nhiệt độ (°C)',
+                                data: temperatureData,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                fill: true,
+                            },
+                            {
+                                label: 'Độ ẩm (%)',
+                                data: humidityData,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                fill: true,
+                            },
+                            {
+                                label: 'CO (ppm)',
+                                data: coData,
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                                fill: true,
+                            },
+                            {
+                                label: 'PM2.5 (µg/m³)',
+                                data: pm25Data,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                fill: true,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, 
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Biểu đồ chất lượng không khí',
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Giờ'
+                                }
+                            },
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Giá trị'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                environmentChart.data.labels = labels;
+                environmentChart.data.datasets[0].data = temperatureData;
+                environmentChart.data.datasets[1].data = humidityData;
+                environmentChart.data.datasets[2].data = coData;
+                environmentChart.data.datasets[3].data = pm25Data;
+                environmentChart.update();
+            }
+        }
+        async function fetchData() {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/sheet_id?key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data && data.values) {
+                    const lastRow = data.values[data.values.length - 1];
+                    displayData(lastRow);
+                    updateChart(data.values.slice(-20));
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        const sheetId = '1oOeN-HUb_xZfcIiY0d06MXUGL0-vsJW5r-zNa_NIKe4';
+        const apiKey = 'AIzaSyAFLByP7yNm_HMSO8sTyWjAXxwVrcXNoXw';
+
+        fetchData(); 
+        setInterval(fetchData, 30000); 
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+            alertModal.show();
+        });
+
+    </script>
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel" data-translate="latestDataTitle">THÔNG TIN DỮ LIỆU MỚI NHẤT</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col" data-translate="location">Vị trí</th>
+                                <th scope="col" data-translate="date">Ngày</th>
+                                <th scope="col" data-translate="time">Giờ</th>
+                                <th scope="col" data-translate="temperature">Nhiệt độ</th>
+                                <th scope="col" data-translate="humidity">Độ ẩm</th>
+                                <th scope="col" data-translate="co">CO</th>
+                                <th scope="col" data-translate="pm25">PM2.5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td id="latestLocation">ĐHQG HN</td>
+                                <td id="latestDate">Đang tải...</td>
+                                <td id="latestTime">Đang tải...</td>
+                                <td id="latestTemperature">Đang tải...</td>
+                                <td id="latestHumidity">Đang tải...</td>
+                                <td id="latestCO">Đang tải...</td>
+                                <td id="latestPM25">Đang tải...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 class="mt-4" data-translate="pollutionLevelsTitle">Các cấp độ ô nhiễm không khí</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" data-translate="pollutionAmount">Hàm lượng</th>
+                                <th scope="col" data-translate="pollutionLevel">Cấp độ</th>
+                                <th scope="col" data-translate="pollutionQuality">Chất lượng không khí</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-success">
+                                <td> 12 trở xuống </td>
+                                <td>1</td>
+                                <td data-translate="qualityGood">Tốt</td>
+                            </tr>
+                            <tr class="table-warning">
+                                <td>13-35</td>
+                                <td>2</td>
+                                <td data-translate="qualityModerate">Vừa phải</td>
+                            </tr>
+                            <tr class="table-danger">
+                                <td>36-55</td>
+                                <td>3</td>
+                                <td data-translate="qualityUnhealthy">Kém</td>
+                            </tr>
+                            <tr class="table-dark">
+                                <td>56 trở lên</td>
+                                <td>4</td>
+                                <td data-translate="qualityVeryUnhealthy">Rất kém</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-danger mt-3" data-translate="note">
+                        Chú ý: Dữ liệu dựa trên sản phẩm thử nghiệm TLD 66 của nhóm sinh viên Khoa Địa Chất, Trường ĐH KHTN - ĐHQG HN
+                        KHÔNG THAY THẾ CHO CÁC THÔNG SỐ CHÍNH THỨC CỦA CƠ QUAN NHÀ NƯỚC VỀ ĐÁNH GIÁ CHẤT LƯỢNG KHÔNG KHÍ 
+                    </p>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="dismissModal()">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="data-section" class="data-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text-center pb-5">
+                        <h1 data-translate="dataSectionTitle">Dữ liệu quan trắc chất lượng không khí</h1>
+                        <p data-translate="dataSectionSubtitle">Dữ liệu được cập nhật từ thiết bị TLD66</p>
                     </div>
+                </div>
+            </div>
+            <div id="data-container" class="row">
+            </div>
+        </div>
+    </section>
+    <section id="chart-section" class="chart-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text-center pb-5">
+                        <h1 data-translate="chartSectionTitle">Biểu đồ giám sát chất lượng không khí</h1>
+                    </div>
+                </div>
+                <div id="chart-container" class="col-md-12">
+                    <canvas id="environmentChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="about-img">
+                        <img src="img/dht22.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+                    <div class="about-text">
+                        <h2> <span class="text-success" data-translate="aboutHeader">Cảm biến nhiệt độ & độ ẩm </span> <br> DHT22</h2>
+                        <p data-translate="dht22Description">
+                            Cảm biến độ ẩm và nhiệt độ DHT22 sử dụng giao tiếp 1 Wire dễ dàng kết nối với Vi điều khiển để thực hiện các ứng dụng đo nhiệt độ, độ ẩm môi trường, cảm biến có chất lượng tốt, kích thước nhỏ gọn, độ bền và độ ổn định cao.
+                            <a href="tailieu/dht_document (1).pdf"target="_blank" data-translate="dht22LinkText">xem chi tiết tại đây</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="about-img">
+                        <img src="img/MQ-7.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+                    <div class="about-text">
+                        <h2> <span class="text-success" data-translate="coSensorHeader">Cảm biến hàm lượng khí CO </span> <br> MQ-7</h2>
+                        <p data-translate="coSensorDescription">
+                            Cảm biến khí CO MQ-7 là cảm biến bán dẫn giá rẻ có khả năng phát hiện khí carbon monoxide từ 10 đến 1000 ppm. Vật liệu tạo ra cảm biến là từ SnO2, có độ dẫn điện thấp trong không khí sạch.
+                            <a href="https://www.instructables.com/Arduino-CO-Monitor-Using-MQ-7-Sensor/"target="_blank" data-translate="coSensorLinkText">xem chi tiết tại đây</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="about-img">
+                        <img src="img/SDS011(1).jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+                    <div class="about-text">
+                        <h2> <span class="text-success" data-translate="airQualitySensorHeader">Cảm biến đo chất lượng khí</span> <br> Nova PM SDS011</h2>
+                        <p data-translate="sds011Description">
+                            SDS011 là cảm biến đo chất lượng không khí có thể phát hiện các hạt bụi và nồng độ khói trong không khí. Chính xác hơn, nó có thể đo nồng độ các hạt bụi có kích thước từ 0.3 đến 10um.
+                            <a href="SDS011-DATASHEET.pdf"target="_blank" data-translate="sds011LinkText">xem chi tiết tại đây</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="about-img">
+                        <img src="img/sharp.jpg" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
+                    <div class="about-text">
+                        <h2> <span class="text-success" data-translate="fineDustSensorHeader">Cảm biến đo hàm lượng bụi mịn</span> <br> SHARP GP2Y1010AU0F</h2>
+                        <p data-translate="sharpDustSensorDescription">
+                            Cảm biến dùng để nhận biết nồng độ bụi trong không khí. Nguyên lý hoạt động dựa trên led phát hồng ngoại trong cảm biến, khi có bụi vào sẽ bị khúc xạ, làm giảm cường độ tia hồng ngoại dẫn đến điện áp thay đổi.
+                            <a href="tailieu/gp2y1010au_e.pdf"target="_blank" data-translate="sharpDustSensorLinkText">xem chi tiết tại đây</a>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <p></p>
+                </div>
                 <div class="col-12 col-md-12 col-lg-4 ">
                     <div class="card1 text-white text-center bg-success pb-5">
                         <div class="card-boddy">
                             <div class="img-area mb-4">
                                 <img src="img/khoadiachat.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3 class="card-title">Tài liệu sử dụng web</h3>
+                            <h3 class="card-title" data-translate="webUsageGuideTitle">Tài liệu sử dụng web</h3>
                             <a class="text-white " href="tailieu/huongdan1.pdf"target="_blank"> Tài liệu hướng dẫn sử dụng</a>
                         </div>
                     </div>
@@ -144,8 +879,8 @@ Nó có thể phát hiện nồng độ các hạt bụi có kích thước từ
                             <div class="img-area mb-4">
                                 <img src="img/khoadiachat.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3 class="card-title">Tài liệu mã code</h3>
-                            <a class="text-white " href=""> Tài liệu hướng dẫn sử dụng</a>
+                            <h3 class="card-title" data-translate="codeDocumentTitle">Tài liệu mã code</h3>
+                            <a class="text-white " href="">Xem chi tiết tại đây</a>
                         </div>
                     </div>
                 </div>
@@ -155,83 +890,80 @@ Nó có thể phát hiện nồng độ các hạt bụi có kích thước từ
                             <div class="img-area mb-4">
                                 <img src="img/khoadiachat.jpg" alt="" class="img-fluid">
                             </div>
-                            <h3 class="card-title">Đang upload</h3>
-                            <a class="text-white " href="results.htm" target="_blank"> Xem kết quả đo</a>
+                            <h3 class="card-title" data-translate="researchTitle">Nghiên cứu</h3>
+                            <a class="text-white " href="" target="_blank">Xem chi tiết tại đây</a>
                         </div>
                     </div>
                 </div>                
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services team-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header text center pb-5">
+                        <h1 data-translate="teamSectionTitle">Nhóm nghiên cứu gồm:</h1>
+                        <p data-translate="teamMembersSubtitle"> Các thành viên chính</p>
+                    </div>
                 </div>
             </div>
-        </section>
-        <section id="services" class=" services team-section-padding">
-                        <div class="section-header text center pb-5">
-                            <h1></h1>
-                            <p></p>
+            <div class="row">
+                <div class="col-12 col-md-2 col-lg-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <img src="img/VD.jpg" alt="" class="img-fuild rounded-circle">
+                            <h2 class="card-title py-2"><span class="text-success" data-translate="member1Name">Thái Văn Đức</span></h2>
+                            <p class="card-text">Lớp: K66 CNQT & GSTNMT </p>
                         </div>
                     </div>
                 </div>
-        <section id="services" class=" services team-section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-header text center pb-5">
-                            <h1>Nhóm nghiên cứu gồm:</h1>
-                            <p> Các thành viên chính</p>
+                <div class="col-12 col-md-2 col-lg-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <img src="img/KL.jpg" alt="" class="img-fuild rounded-circle">
+                            <h2 class="card-title py-2"> <span class="text-success" data-translate="member2Name">Nguyễn Khánh Linh</span></h2>
+                            <p class="card-text">Lớp: K66 CNQT & GSTNMT  </p>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-2 col-lg-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="img/VD.jpg" alt="" class="img-fuild rounded-circle">
-                                <h2 class="card-title py-2"><span class="text-success">Thái Văn Đức</span></h2>
-                                <p class="card-text">Lớp: K66 CNQT & GSTNMT </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2 col-lg-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="img/KL.jpg" alt="" class="img-fuild rounded-circle">
-                                <h2 class="card-title py-2"> <span class="text-success">Nguyễn Khánh Linh</span></h2>
-                                <p class="card-text">Lớp: K66 CNQT & GSTNMT  </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2 col-lg-4">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <img src="img/GT.jpg" alt="" class="img-fuild rounded-circle">
-                                <h2 class="card-title py-2"> <span class="text-success">Giang Ngọc Thảo</span></h2>
-                                <p class="card-text">Lớp: K66 CNQT & GSTNMT  </p>
-                            </div>
+                <div class="col-12 col-md-2 col-lg-4">
+                    <div class="card text-center">
+                         <div class="card-body text-center">
+                            <img src="img/GT1.jpg" alt="" class="img-fluid rounded-circle mb-2" style="width: 245px; height: 245px; object-fit: cover;">
+                            <h2 class="card-title py-2 text-success" data-translate="member3Name">Giang Ngọc Thảo</h2>
+                            <p class="card-text">Lớp: K66 CNQT & GSTNMT</p>
+                        </div> 
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <footer>
-            <div class="items-infor d-flex">
-                <div class="infor-wrap">
-                    <h3>Thông tin hỗ trợ</h3>
-                    <div class="color_infor-wrap"> 
-                        <ul>
-                            <li>
-                                Số điện thoại: 
-                                    <span>
-                                        (+ 84) 935548502
-                                        <br>
-                                        Thái Văn Đức
-                                    </span>
-                            </li>
-                            <li>
-                                Email: <span>thaivanduc_t66@hus.edu.vn</span>
-                            </li>
-                        </ul>
-                    </div>
+        </div>
+    </section>
+    <footer>
+        <div class="items-infor d-flex">
+            <div class="infor-wrap">
+                <h3 data-translate="contactInfo">Thông tin hỗ trợ</h3>
+                <div class="color_infor-wrap"> 
+                    <ul>
+                        <li>
+                            <span data-translate="phone">Số điện thoại: </span>
+                            <span>
+                                (+ 84) 935548502
+                                <br>
+                                Thái Văn Đức
+                            </span>
+                        </li>
+                        <li>
+                            <span data-translate="email">Email: </span>
+                            <span>thaivanduc_t66@hus.edu.vn</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </body>
+        </div>
+    </footer> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+</body>
 </html>
