@@ -17,16 +17,55 @@ const svgPath = document.querySelector('#svg-path');
 const patterns = ['pattern0_1', 'pattern0_2', 'pattern0_3'];
 let currentPatternIndex = 0;
 
-function showNextPattern() {
-    svgPath.setAttribute('fill', `url(#${patterns[currentPatternIndex]})`);
-    currentPatternIndex = (currentPatternIndex + 1) % patterns.length;
-    if (currentPatternIndex === 0) {
-        setTimeout(showNextPattern, 0);
-    }
+// Kiểm tra xem hình ảnh có tải được không
+function checkImageLoad(imageUrl) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => resolve(true);
+        img.onerror = () => reject(new Error(`Không thể tải hình ảnh: ${imageUrl}`));
+    });
 }
 
-setInterval(showNextPattern, 7000);
-showNextPattern();
+// Kiểm tra tất cả hình ảnh trước khi chạy slideshow
+async function initializeSlideshow() {
+    const imageUrls = [
+        '/img/HB.jpg',
+        '/img/HB2.jpg',
+        '/img/Nhieu_kv.jpg'
+    ];
+
+    try {
+        await Promise.all(imageUrls.map(url => checkImageLoad(url)));
+        console.log('Tất cả hình ảnh đã tải thành công');
+    } catch (error) {
+        console.error(error.message);
+        return false;
+    }
+    return true;
+}
+
+function showNextPattern() {
+    if (!svgPath) {
+        console.error('Không tìm thấy #svg-path trong DOM');
+        return;
+    }
+    svgPath.setAttribute('fill', `url(#${patterns[currentPatternIndex]})`);
+    currentPatternIndex = (currentPatternIndex + 1) % patterns.length;
+}
+
+// Khởi tạo slideshow
+(async () => {
+    if (svgPath) {
+        const imagesLoaded = await initializeSlideshow();
+        if (imagesLoaded) {
+            setInterval(showNextPattern, 5000); // Chuyển slide mỗi 5 giây (5000ms)
+            showNextPattern();
+        } else {
+            console.error('Slideshow không khởi động do lỗi tải hình ảnh');
+        }
+    }
+})();
 
 // Slideshow cho Rectangle 4
 const slides = document.querySelectorAll('.rectangle-4-slide');
@@ -37,12 +76,16 @@ const titleElement = document.querySelector('#rectangle-4-title');
 let currentSlideIndex = 0;
 
 function showSlide(index) {
+    if (!slides.length || !dots.length || !titleElement) {
+        console.error('Không tìm thấy slides, dots hoặc titleElement trong DOM');
+        return;
+    }
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
     slides[index].classList.add('active');
     dots[index].classList.add('active');
     
-    const newTitle = slides[index].getAttribute('data-title');
+    const newTitle = slides[index].getAttribute('data-title') || 'Không có tiêu đề';
     titleElement.textContent = newTitle;
     
     currentSlideIndex = index;
@@ -58,19 +101,23 @@ function showPrevSlide() {
     showSlide(currentSlideIndex);
 }
 
-setInterval(showNextSlide, 7000);
+if (slides.length && dots.length) {
+    setInterval(showNextSlide, 7000);
 
-prevButton.addEventListener('click', showPrevSlide);
-nextButton.addEventListener('click', showNextSlide);
+    prevButton?.addEventListener('click', showPrevSlide);
+    nextButton?.addEventListener('click', showNextSlide);
 
-dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-        const index = parseInt(dot.getAttribute('data-index'));
-        showSlide(index);
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.getAttribute('data-index'));
+            if (!isNaN(index)) {
+                showSlide(index);
+            }
+        });
     });
-});
 
-showSlide(currentSlideIndex);
+    showSlide(currentSlideIndex);
+}
 
 // Dự báo thời tiết cho Rectangle 5
 const districtSelect = document.querySelector('#district-select');
@@ -82,8 +129,8 @@ const weatherWind = document.querySelector('.weather-wind');
 const weatherIcon = document.querySelector('.weather-icon');
 const forecastDays = document.querySelectorAll('.forecast-day');
 
-// Sử dụng API key từ dự án trước
-const apiKey = '12118cdb333f0039947273d009989237';
+// Sử dụng API key từ dự án trước (có thể không hợp lệ)
+const apiKey = '12118cdb333f0039947273d009989237'; // Thay bằng API key mới (32 ký tự)
 
 const locations = {
     "Luc Yen": {
@@ -145,8 +192,16 @@ const locations = {
 };
 
 function updateCommuneOptions() {
+    if (!districtSelect || !communeSelect) {
+        console.error('Không tìm thấy districtSelect hoặc communeSelect trong DOM');
+        return;
+    }
     const district = districtSelect.value;
-    const communes = locations[district].communes;
+    const communes = locations[district]?.communes;
+    if (!communes) {
+        console.error(`Không tìm thấy xã cho huyện: ${district}`);
+        return;
+    }
     communeSelect.innerHTML = '';
 
     for (const commune in communes) {
@@ -161,6 +216,11 @@ function updateCommuneOptions() {
 }
 
 async function fetchWeather(lat, lon) {
+    if (!weatherTemp || !weatherCondition || !weatherHumidity || !weatherWind || !weatherIcon || !forecastDays.length) {
+        console.error('Không tìm thấy các phần tử thời tiết trong DOM');
+        return;
+    }
+
     try {
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=vi`;
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=vi`;
@@ -170,7 +230,7 @@ async function fetchWeather(lat, lon) {
         const weatherData = await weatherResponse.json();
 
         if (weatherData.cod !== 200) {
-            throw new Error(`Lỗi từ API: ${weatherData.message}`);
+            throw new Error(`Lỗi từ API thời tiết: ${weatherData.message}`);
         }
 
         // Gọi API dự báo
@@ -227,12 +287,20 @@ async function fetchWeather(lat, lon) {
     }
 }
 
-districtSelect.addEventListener('change', updateCommuneOptions);
-communeSelect.addEventListener('change', () => {
+districtSelect?.addEventListener('change', updateCommuneOptions);
+communeSelect?.addEventListener('change', () => {
+    if (!districtSelect || !communeSelect) {
+        console.error('Không tìm thấy districtSelect hoặc communeSelect trong DOM');
+        return;
+    }
     const district = districtSelect.value;
     const commune = communeSelect.value;
-    const { lat, lon } = locations[district].communes[commune];
-    fetchWeather(lat, lon);
+    const { lat, lon } = locations[district]?.communes[commune] || {};
+    if (lat && lon) {
+        fetchWeather(lat, lon);
+    } else {
+        console.error(`Không tìm thấy tọa độ cho xã ${commune} trong huyện ${district}`);
+    }
 });
 
 updateCommuneOptions();
