@@ -88,10 +88,33 @@ function calculateCumulativeRain(rainData) {
     });
 }
 
+// Hàm định dạng thời gian
+function formatDateTime(date) {
+    const options = { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: false 
+    };
+    return date.toLocaleString('vi-VN', options).replace(/,/, '');
+}
+
 // Xử lý và hiển thị dữ liệu cho Rectangle-4
 async function renderRectangle4() {
     const accelDataRaw = await fetchData(API_URL);
     const rainDataRaw = await fetchData(API_URL_RAIN);
+
+    // Cập nhật thời gian
+    const updateTimeElement = document.getElementById('update-time');
+    if (updateTimeElement) { // Kiểm tra null
+        const updateTime = new Date();
+        updateTimeElement.textContent = `Cập nhật lúc: ${formatDateTime(updateTime)}`;
+    } else {
+        console.warn('Phần tử #update-time không tồn tại trong DOM');
+    }
 
     // Slide 1: Bảng dữ liệu ESP32
     const accelData = accelDataRaw.slice(1).slice(-5); // Lấy 5 dòng cuối
