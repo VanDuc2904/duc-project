@@ -4,39 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Quan Trắc</title>
-<!-- Triển khai lại để cập nhật tên miền -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
-    <!-- Link to Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Link to CSS file -->
-    <link rel="stylesheet" href="styles2.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha384-gZ3mC7EJGpe4g0fH26mk2raVScTR3+/wD8/wJkcnExZZwodkL1Xb0xnL0IisveU0" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Frame 4: Outer container -->
     <div class="frame-4">
-        <!-- Frame 1: Inner container for navigation items -->
         <div class="frame-1">
-            <!-- Main Title -->
             <div class="main-title">HỆ THỐNG QUAN TRẮC</div>
-            <!-- Navigation Links -->
             <a href="index.htm" class="nav-home">Trang chủ</a>
             <a href="Thongtinqt.htm" class="nav-monitoring-info">Thông tin quan trắc</a>
             <a href="statistics.html" class="nav-statistics">Thống kê</a>
             <a href="contact.html" class="nav-contact">Liên hệ</a>
-            <!-- Slope Movement (Experimental) -->
             <div class="nav-slope-movement">Dịch chuyển mái dốc (thử nghiệm)</div>
         </div>
-        <!-- Right-side elements -->
         <div class="right-section">
-            <!-- Search Input -->
             <input type="text" class="search-input" placeholder="Tìm kiếm...">
-            <!-- Google Translate Icon -->
             <div class="google-translate"><i class="fas fa-globe"></i></div>
-            <!-- User Male Icon -->
             <div class="user-male"><i class="fas fa-user"></i></div>
-            <!-- Search Icon (inside the search input) -->
             <div class="search"><i class="fas fa-search"></i></div>
         </div>
     </div>
@@ -55,7 +41,6 @@
                 <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
                     <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
                 </pattern>
-                <!-- Các hình ảnh -->
                 <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
                 <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
                 <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
@@ -65,59 +50,89 @@
 
     <!-- Polygon 3 Container -->
     <div class="polygon-3">
-        <!-- Frame 2: Chứa phần chữ -->
         <div class="frame-2">
             <div class="real-time-title">HỆ THỐNG QUAN TRẮC THỜI GIAN THỰC</div>
             <div class="slope-movement-text">Dịch chuyển mái dốc</div>
         </div>
-        <!-- Rectangle 4: Bảng DỮ LIỆU CẢM BIẾN MPU9250 -->
+
+        <!-- Rectangle 4: Cấu trúc mới với 5 slide -->
         <div class="rectangle-4">
-            <!-- SVG làm nền -->
-            <svg class="rectangle-4-bg" width="781" height="432" viewBox="0 0 903 194" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path d="M8.01258 50.6506C-8.57287 30.4142 5.82411 0 31.9887 0H872C889.121 0 903 13.8792 903 31V163C903 180.121 889.121 194 872 194H140.174C130.885 194 122.086 189.835 116.198 182.651L8.01258 50.6506Z" fill="url(#pattern0_1_1433)"/>
-                <defs>
-                    <pattern id="pattern0_1_1433" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_1_1433" transform="matrix(0.00125 0 0 0.00603415 0 -0.987418)"/>
-                    </pattern>
-                    <image id="image0_1_1433" width="800" height="493" preserveAspectRatio="none" xlink:href="HB.jpg"/>
-                </defs>
+            <svg class="rectangle-4-bg" width="781" height="432" viewBox="0 0 781 432" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="781" height="432" rx="15" fill="#EFEFEF"/>
             </svg>
-            <!-- Nội dung bên trong -->
             <div class="rectangle-4-content">
-                <!-- Tiêu đề động -->
-                <div class="rectangle-4-title" id="rectangle-4-title">DỮ LIỆU CẢM BIẾN MPU9250</div>
-                
-                <!-- Bảng hiển thị dữ liệu -->
-                <table id="data-table" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Ngày</th>
-                            <th>Giờ</th>
-                            <th>Gia tốc X</th>
-                            <th>Gia tốc Y</th>
-                            <th>Gia tốc Z</th>
-                            <th>Gyro X</th>
-                            <th>Gyro Y</th>
-                            <th>Gyro Z</th>
-                            <th>Magnetometer X</th>
-                            <th>Magnetometer Y</th>
-                            <th>Magnetometer Z</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Dữ liệu sẽ được thêm động vào đây -->
-                    </tbody>
-                </table>
+                <div class="rectangle-4-title" id="rectangle-4-title">THÔNG TIN CẢM BIẾN ESP32</div>
+                <div class="update-time" id="update-time">Cập nhật lúc: Đang tải...</div> <!-- Thêm ghi chú thời gian -->
+                <div class="rectangle-4-slides">
+                    <!-- Slide 1: Bảng thông tin cảm biến ESP32 -->
+                    <div class="rectangle-4-slide slide-1 active" data-title="THÔNG TIN CẢM BIẾN ESP32">
+                        <table class="sensor-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Disp X (mm)</th>
+                                    <th>Disp Y (mm)</th>
+                                    <th>Disp Z (mm)</th>
+                                    <th>Vel X (mm/s)</th>
+                                    <th>Vel Y (mm/s)</th>
+                                    <th>Vel Z (mm/s)</th>
+                                    <th>Nhiệt độ (°C)</th>
+                                    <th>Trạng thái</th>
+                                    <th>Packet ID</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accel-table-body">
+                                <!-- Dữ liệu sẽ được điền bằng JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Slide 2: Biểu đồ Displacement X -->
+                    <div class="rectangle-4-slide slide-2" data-title="BIỂU ĐỒ DISPLACEMENT X">
+                        <canvas id="dispX-chart" width="700" height="300"></canvas>
+                    </div>
+                    <!-- Slide 3: Bảng thông tin mưa -->
+                    <div class="rectangle-4-slide slide-3" data-title="THÔNG TIN LƯỢNG MƯA">
+                        <table class="rain-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Lượng mưa (mm)</th>
+                                    <th>Cường độ mưa (mm/h)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rain-table-body">
+                                <!-- Dữ liệu sẽ được điền bằng JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Slide 4: Biểu đồ mưa -->
+                    <div class="rectangle-4-slide slide-4" data-title="BIỂU ĐỒ LƯỢNG MƯA">
+                        <canvas id="rain-chart" width="700" height="300"></canvas>
+                    </div>
+                    <!-- Slide 5: Biểu đồ Velocity Z -->
+                    <div class="rectangle-4-slide slide-5" data-title="BIỂU ĐỒ VELOCITY Z">
+                        <canvas id="velZ-chart" width="700" height="300"></canvas>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="rectangle-4-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                </div>
+                <!-- Nút điều hướng -->
+                <button class="rectangle-4-prev"><</button>
+                <button class="rectangle-4-next">></button>
             </div>
         </div>
-        
+
         <!-- Rectangle 5: Bảng Dự Báo Thời Tiết -->
         <div class="rectangle-5">
-            <!-- SVG làm nền -->
             <svg class="rectangle-5-bg" width="515" height="432" viewBox="0 0 515 432" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="515" height="432" rx="15" fill="#EFEFEF"/>
             </svg>
-            <!-- Nội dung bên trong -->
             <div class="rectangle-5-content">
                 <div class="weather-title">DỰ BÁO THỜI TIẾT (Theo OpenWeatherMap)</div>
                 <div class="weather-location">
@@ -175,6 +190,8 @@
         </div>
     </div>
 
+    <!-- Liên kết đến Chart.js để vẽ biểu đồ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Liên kết đến file JavaScript -->
     <script src="script2.js"></script>
 </body>
