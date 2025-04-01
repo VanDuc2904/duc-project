@@ -60,7 +60,7 @@ function showNextPattern() {
 })();
 
 // Lấy dữ liệu từ Google Sheets
-const SPREADSHEET_ID = '1L-F244XoR4NuNpBJ7taJqOURuLFFt-rPtyLjsEkU2Ts'; // MPU9250
+const SPREADSHEET_ID = '1416C6GSyUnI4G4nGVipU4XAeEZS1PIkagu07BRnk3rs'; // MPU9250
 const SPREADSHEET_ID_RAIN = '1qThn_QQ0RSoUtsBuiC3_BAoEtq5EctXF5tweQuB3TxA'; // Rain
 const API_KEY = 'AIzaSyABMCq59dfs-BwzlbPuQHHrnMcW1RfyP2M';
 const API_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Trang tính1!A1:J?key=${API_KEY}`;
