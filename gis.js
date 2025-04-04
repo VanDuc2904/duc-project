@@ -201,12 +201,16 @@ window.initMap = async function () {
     const infoWindow = new google.maps.InfoWindow();
     console.log("InfoWindow created:", infoWindow); // Debug: Check if InfoWindow is created
 
+    // Định nghĩa URL hình ảnh cho các marker (có thể thay đổi)
+    const redMarkerIcon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'; // Hình ảnh cho marker đỏ
+    const greenMarkerIcon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'; // Hình ảnh cho marker xanh
+
     // Marker 1: Red marker for accel and rain data from Google Sheets
     const marker1 = new google.maps.Marker({
         position: { lat: 20.995536, lng: 105.808129 },
         map: map,
         title: `YB-TQLM-1`, // Đặt tên điểm là YB-TQLM-1
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' // Màu đỏ cho trạm gia tốc
+        icon: redMarkerIcon // Sử dụng hình ảnh tùy chỉnh cho marker đỏ
     });
     console.log("Marker 1 created:", marker1); // Debug: Check if marker is created
 
@@ -221,7 +225,7 @@ window.initMap = async function () {
         position: { lat: 20.995536 + 0.0005, lng: 105.808129 + 0.0005 }, // Nhích nhẹ để tránh chồng lấn
         map: map,
         title: `Dự báo lượng mưa`,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' // Màu xanh cho trạm dự báo
+        icon: greenMarkerIcon // Sử dụng hình ảnh tùy chỉnh cho marker xanh
     });
     console.log("Marker 2 created:", marker2); // Debug: Check if marker is created
 
@@ -363,7 +367,7 @@ window.initMap = async function () {
             // Tạo nội dung HTML cho InfoWindow
             const content = document.createElement('div');
             content.style.width = '400px';
-            content.style.height = '500px'; // Tăng chiều cao để chứa cả hai biểu đồ
+            content.style.height = '400px'; // Giảm chiều cao vì chỉ có một biểu đồ
             content.innerHTML = `
                 <h3>DỰ BÁO LƯỢNG MƯA (Theo OpenWeatherMap)</h3>
                 <p><strong>Tọa độ:</strong> Kinh độ: ${lng.toFixed(2)}; Vĩ độ: ${lat.toFixed(2)}</p>
@@ -371,8 +375,6 @@ window.initMap = async function () {
                 <p><strong>Xã:</strong> Không xác định</p>
                 <h4>Lượng mưa dự báo</h4>
                 <canvas id="forecast-rain-chart" width="350" height="150"></canvas>
-                <h4>Lượng mưa tích lũy dự báo</h4>
-                <canvas id="forecast-cumulative-rain-chart" width="350" height="150"></canvas>
             `;
 
             infoWindow.setContent(content);
@@ -381,11 +383,11 @@ window.initMap = async function () {
             infoWindow.open(map, marker);
             console.log("InfoWindow opened for forecast"); // Debug: Check if InfoWindow opens
 
-            // Vẽ biểu đồ lượng mưa dự báo
+            // Vẽ biểu đồ lượng mưa dự báo (kết hợp cả lượng mưa giờ và tích lũy)
             google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
                 console.log("InfoWindow domready event triggered for forecast"); // Debug: Check if domready is triggered
 
-                // Biểu đồ lượng mưa dự báo (bar chart)
+                // Biểu đồ lượng mưa dự báo (bar chart) và lượng mưa tích lũy (line chart)
                 const rainCtx = document.getElementById('forecast-rain-chart');
                 if (!rainCtx) {
                     console.error("Forecast rain canvas element not found");
@@ -395,49 +397,23 @@ window.initMap = async function () {
                 console.log("Forecast rain chart context created:", rainChartCtx); // Debug: Check chart context
 
                 new Chart(rainChartCtx, {
-                    type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [
-                            { label: 'Lượng mưa dự báo (mm)', data: rainForecastData, backgroundColor: 'rgba(54, 162, 235, 0.5)' }
+                            { type: 'bar', label: 'Lượng mưa dự báo (mm)', data: rainForecastData, backgroundColor: 'rgba(54, 162, 235, 0.5)', yAxisID: 'y1' },
+                            { type: 'line', label: 'Lượng mưa tích lũy dự báo (mm)', data: cumulativeRainForecastData, borderColor: 'red', fill: false, yAxisID: 'y2' }
                         ]
                     },
                     options: {
                         responsive: true,
                         scales: {
                             x: { title: { display: true, text: 'Ngày' } },
-                            y: { title: { display: true, text: 'Lượng mưa (mm)' }, beginAtZero: true }
+                            y1: { position: 'left', title: { display: true, text: 'Lượng mưa (mm)' }, beginAtZero: true },
+                            y2: { position: 'right', title: { display: true, text: 'Lượng mưa tích lũy (mm)' }, beginAtZero: true, grid: { drawOnChartArea: false } }
                         }
                     }
                 });
                 console.log("Forecast rain chart rendered"); // Debug: Check if chart is rendered
-
-                // Biểu đồ lượng mưa tích lũy dự báo (line chart)
-                const cumulativeRainCtx = document.getElementById('forecast-cumulative-rain-chart');
-                if (!cumulativeRainCtx) {
-                    console.error("Forecast cumulative rain canvas element not found");
-                    return;
-                }
-                const cumulativeRainChartCtx = cumulativeRainCtx.getContext('2d');
-                console.log("Forecast cumulative rain chart context created:", cumulativeRainChartCtx); // Debug: Check chart context
-
-                new Chart(cumulativeRainChartCtx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            { label: 'Lượng mưa tích lũy dự báo (mm)', data: cumulativeRainForecastData, borderColor: 'red', fill: false }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: { title: { display: true, text: 'Ngày' } },
-                            y: { title: { display: true, text: 'Lượng mưa tích lũy (mm)' }, beginAtZero: true }
-                        }
-                    }
-                });
-                console.log("Forecast cumulative rain chart rendered"); // Debug: Check if chart is rendered
             });
         } catch (error) {
             console.error("Error in showWeatherForecastInfo:", error); // Debug: Catch any errors
