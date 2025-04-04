@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quan Trắc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Frame 4: Outer container -->
+    <div class="frame-4">
+        <div class="frame-1">
+            <div class="main-title">HỆ THỐNG QUAN TRẮC</div>
+            <a href="index.htm" class="nav-home">Trang chủ</a>
+            <a href="Thongtinqt.htm" class="nav-monitoring-info">Thông tin quan trắc</a>
+            <a href="Thongtinqt.htm" class="nav-monitoring-webgis">Webgis</a>
+            <a href="statistics.html" class="nav-statistics">Thống kê</a>
+            <a href="contact.html" class="nav-contact">Liên hệ</a>
+            <div class="nav-slope-movement">Dịch chuyển mái dốc (thử nghiệm)</div>
+        </div>
+        <div class="right-section">
+            <input type="text" class="search-input" placeholder="Tìm kiếm...">
+            <div class="google-translate"><i class="fas fa-globe"></i></div>
+            <div class="user-male"><i class="fas fa-user"></i></div>
+            <div class="search"><i class="fas fa-search"></i></div>
+        </div>
+    </div>
+
+    <!-- Frame 3 Container -->
+    <div class="frame-3">
+        <svg class="slideshow-svg" width="802" height="214" viewBox="0 0 792 214" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path id="svg-path" d="M68.0397 63.7456C47.3517 44.5882 60.9068 10 89.1024 10H761C778.121 10 792 23.8792 792 41V173C792 190.121 778.121 204 761 204H231.649C223.839 204 216.317 201.052 210.586 195.746L68.0397 63.7456Z" fill="url(#pattern0_1)"/>
+            <defs>
+                <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_1" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                </pattern>
+                <pattern id="pattern0_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_2" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                </pattern>
+                <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                </pattern>
+                <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
+                <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
+                <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Polygon 3 Container -->
+    <div class="polygon-3">
+        <div class="frame-2">
+            <div class="real-time-title">HỆ THỐNG QUAN TRẮC THỜI GIAN THỰC</div>
+            <div class="slope-movement-text">Dịch chuyển mái dốc</div>
+        </div>
+
+        <!-- Rectangle 965: Bản đồ WebGIS -->
+        <div class="rectangle-965">
+            <svg width="799" height="520" viewBox="0 0 889 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="799" height="520" rx="35" fill="#EFEFEF"/>
+            </svg>
+            <div class="rectangle-965-content">
+                <div id="map"></div> <!-- Container cho bản đồ -->
+                <!-- Group 4043 -->
+                <div class="group-4043" id="toggle-control">
+                    <div class="ellipse-1">
+                        <!-- Group 4042: 3 dấu gạch ngang -->
+                        <div class="group-4042">
+                            <svg class="vector" width="29.33" height="22" viewBox="0 0 29.33 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="4" width="20" height="2" fill="#FFFFFF"/>
+                                <rect x="5" y="10" width="20" height="2" fill="#FFFFFF"/>
+                                <rect x="5" y="16" width="20" height="2" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Bản điều khiển dropdown -->
+                    <div class="control-panel" id="control-panel">
+                        <svg width="358" height="452" viewBox="0 0 358 452" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="358" height="452" rx="10" fill="#FFFAFA"/>
+                        </svg>
+                        <div class="control-panel-content">
+                            <h3>DỰ BÁO TRƯỢT LỞ</h3>
+                            <div class="control-section">
+                                <label>Huyện</label>
+                                <select id="district-select-control" aria-label="Chọn huyện để xem dự báo thời tiết">
+                                    <option value="Luc Yen">Lục Yên</option>
+                                    <option value="Van Yen">Văn Yên</option>
+                                    <option value="Mu Cang Chai">Mù Cang Chải</option>
+                                    <option value="Tran Yen">Trấn Yên</option>
+                                    <option value="Yen Binh">Yên Bình</option>
+                                    <option value="Van Chan">Văn Chấn</option>
+                                    <option value="Tram Tau">Trạm Tấu</option>
+                                    <option value="Yen Bai City">Thành phố Yên Bái</option>
+                                </select>
+                            </div>
+                            <div class="control-section">
+                                <label>Xã</label>
+                                <select id="commune-select-control" aria-label="Chọn xã để xem dự báo thời tiết">
+                                    <!-- Các xã sẽ được điền động bằng JavaScript -->
+                                </select>
+                            </div>
+                            <div class="control-section">
+                                <label>Vị trí trạm quan trắc (OpenWeatherMap)</label>
+                                <canvas id="openweather-rain-chart" width="300" height="150"></canvas>
+                                <label>Biểu đồ lượng mưa tích lũy dự báo</label>
+                                <canvas id="openweather-cumulative-chart" width="300" height="150"></canvas>
+                            </div>
+                            <div class="control-section">
+                                <label>Biểu đồ cảm biến gia tốc</label>
+                                <canvas id="accel-chart" width="300" height="150"></canvas>
+                                <label>Biểu đồ lượng mưa</label>
+                                <canvas id="rain-chart" width="300" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rectangle 5: Bảng Dự Báo Thời Tiết -->
+        <div class="rectangle-5">
+            <svg class="rectangle-5-bg" width="515" height="432" viewBox="0 0 515 432" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="515" height="432" rx="15" fill="#EFEFEF"/>
+            </svg>
+            <div class="rectangle-5-content">
+                <div class="weather-title">DỰ BÁO THỜI TIẾT (Theo OpenWeatherMap)</div>
+                <div class="weather-location">
+                    <select id="district-select" aria-label="Chọn huyện để xem dự báo thời tiết">
+                        <option value="Luc Yen">Lục Yên</option>
+                        <option value="Van Yen">Văn Yên</option>
+                        <option value="Mu Cang Chai">Mù Cang Chải</option>
+                        <option value="Tran Yen">Trấn Yên</option>
+                        <option value="Yen Binh">Yên Bình</option>
+                        <option value="Van Chan">Văn Chấn</option>
+                        <option value="Tram Tau">Trạm Tấu</option>
+                        <option value="Yen Bai City">Thành phố Yên Bái</option>
+                    </select>
+                    <select id="commune-select" aria-label="Chọn xã để xem dự báo thời tiết">
+                        <!-- Các xã sẽ được điền động bằng JavaScript -->
+                    </select>
+                </div>
+                <div class="weather-current">
+                    <div class="weather-icon"></div>
+                    <div class="weather-details">
+                        <div class="weather-temp"></div>
+                        <div class="weather-condition"></div>
+                        <div class="weather-humidity"></div>
+                        <div class="weather-wind"></div>
+                    </div>
+                </div>
+                <div class="weather-forecast">
+                    <div class="forecast-day">
+                        <div class="forecast-day-name"></div>
+                        <div class="forecast-icon"></div>
+                        <div class="forecast-temp"></div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-day-name"></div>
+                        <div class="forecast-icon"></div>
+                        <div class="forecast-temp"></div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-day-name"></div>
+                        <div class="forecast-icon"></div>
+                        <div class="forecast-temp"></div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-day-name"></div>
+                        <div class="forecast-icon"></div>
+                        <div class="forecast-temp"></div>
+                    </div>
+                    <div class="forecast-day">
+                        <div class="forecast-day-name"></div>
+                        <div class="forecast-icon"></div>
+                        <div class="forecast-temp"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liên kết đến Chart.js để vẽ biểu đồ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Liên kết đến file JavaScript trước Google Maps API -->
+    <script src="gis.js"></script>
+    <!-- Liên kết đến Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANCLP-LOwPUPr0HpeBGWxl4ZfoRXVgdzY&callback=initMap" async defer></script>
+</body>
+</html>
