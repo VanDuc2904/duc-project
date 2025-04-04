@@ -1,0 +1,1380 @@
+/* styles.css */
+
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Frame 4 (Outer container - Menu) */
+  .frame-4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 15px;
+    isolation: isolate;
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    margin: 0 auto;
+    background: #FFFFFF;
+  }
+  
+  /* Frame 1 (Inner container for navigation items) */
+  .frame-1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
+    padding: 0px;
+    gap: 0px 20px;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+    z-index: 0;
+  }
+  
+  /* HỆ THỐNG QUAN TRẮC (Main Title) */
+  .main-title {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    color: #55BB47;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  /* Trang chủ (Home Link) */
+  .nav-home {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    color: #5AA650;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Thông tin quan trắc (Monitoring Info Link) */
+  .nav-monitoring-info {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #5AA650;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Thống kê (Statistics Link) */
+  .nav-statistics {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #5AA650;
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .nav-monitoring-webgis {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #5AA650;
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  /* Liên hệ (Contact Link) */
+  .nav-contact {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #5AA650;
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Dịch chuyển mái dốc (thử nghiệm) (Slope Movement - Experimental) */
+  .nav-slope-movement {
+    width: auto;
+    height: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    flex: none;
+    order: 5;
+    flex-grow: 0;
+  }
+  
+  /* Hiệu ứng hover và active cho các mục menu */
+  .nav-home,
+  .nav-monitoring-info,
+  .nav-statistics,
+  .nav-contact {
+    color: #5AA650; /* Màu mặc định cho tất cả các mục */
+  }
+  
+  /* Hiệu ứng hover */
+  .nav-home:hover,
+  .nav-monitoring-info:hover,
+  .nav-statistics:hover,
+  .nav-contact:hover {
+    color: #000000; /* Màu đen khi hover */
+    transform: scale(1.05);
+  }
+  
+  /* Hiệu ứng active */
+  .nav-home.active,
+  .nav-monitoring-info.active,
+  .nav-statistics.active,
+  .nav-contact.active {
+    color: #000000 !important; /* Màu đen khi active */
+    font-weight: 900;
+  }
+  
+  /* Khi hover vào mục đang active, giữ màu đen */
+  .nav-home.active:hover,
+  .nav-monitoring-info.active:hover,
+  .nav-statistics.active:hover,
+  .nav-contact.active:hover {
+    color: #000000 !important;
+    transform: scale(1.05);
+  }
+  
+  /* Right Section (for icons and search bar) */
+  .right-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    max-width: 250px;
+  }
+  
+  /* Search Input */
+  .search-input {
+    width: 15rem;
+    max-width: 100%;
+    height: 1.5rem;
+    background: rgba(217, 217, 217, 0.5);
+    border-radius: 10px;
+    border: none;
+    padding: 0 0.2rem 0 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    outline: none;
+    margin-left: 0; /* đảm bảo không có margin trái */
+    /* hoặc dùng transform để di chuyển */
+    transform: translateX(-50%); /* di chuyển sang trái 50% chiều rộng của chính nó */
+  }
+  
+  .search-input::placeholder {
+    color: #888;
+  }
+  
+  /* Google Translate Icon */
+  .google-translate {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    z-index: 2;
+    position: absolute;
+    right: 4rem;
+  }
+  
+  /* User Male Icon */
+  .user-male {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+    z-index: 3;
+    position: absolute;
+    right: 5.5rem;
+  }
+  
+  /* Search Icon (inside the search input) */
+  .search {
+    width: 0.9375rem;
+    height: 0.9375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+    z-index: 4;
+    position: absolute;
+    right: 10rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Polygon 3 */
+  .polygon-3 {
+    position: absolute;
+    width: 1440px;
+    height: 765px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 129px;
+    background: url('data:image/svg+xml;utf8,<svg width="1440" height="765" viewBox="0 0 1440 765" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M620.885 0C628.358 0 635.562 2.78915 641.087 7.82144L853.913 201.679C859.438 206.711 866.642 209.5 874.115 209.5H1410C1426.57 209.5 1440 222.931 1440 239.5V735C1440 751.569 1426.57 765 1410 765H30C13.4314 765 0 751.569 0 735V30C0 13.4315 13.4315 0 30 0H620.885Z" fill="%23F5F5F5"/></svg>') no-repeat center center;
+    background-size: cover;
+    border-radius: 30px;
+  }
+  
+  /* Frame 2 */
+  .frame-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    gap: 20px;
+    position: absolute;
+    width: 478px;
+    height: 116px;
+    left: 60px;
+    top: 40px;
+  }
+  
+  /* HỆ THỐNG QUAN TRẮC THỜI GIAN THỰC */
+  .real-time-title {
+    width: 100%;
+    height: 66px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #5AA650;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+  
+  /* Dịch chuyển mái dốc */
+  .slope-movement-text {
+    width: 100%;
+    height: 19px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #000000;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+  
+  /* Frame 3 */
+  .frame-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    position: absolute;
+    width: 802px;
+    height: 224px;
+    left: 50%;
+    transform: translateX(-8%);
+    top: 110px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 36px;
+    overflow: hidden;
+  }
+  
+  /* SVG trong slideshow */
+  .slideshow-svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Rectangle 4 */
+  .rectangle-4 {
+    position: absolute;
+    width: 781px;
+    height: 432px;
+    left: 79px;
+    top: 253px;
+  }
+  
+  /* SVG làm nền */
+  .rectangle-4-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  /* Nội dung bên trong Rectangle 4 */
+  .rectangle-4-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    z-index: 1;
+  }
+  
+  /* Tiêu đề GIỚI THIỆU VỀ CHỨNG TÔI */
+  .rectangle-4-title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
+    color: #5AA650;
+    text-align: center;
+  }
+  
+  /* Container cho các slide */
+  .rectangle-4-slides {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Slide */
+  .rectangle-4-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #000000;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Slide active */
+  .rectangle-4-slide.active {
+    opacity: 1;
+  }
+  
+  /* Nút điều hướng */
+  .rectangle-4-prev,
+  .rectangle-4-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #5AA650;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .rectangle-4-prev {
+    left: 20px;
+  }
+  
+  .rectangle-4-next {
+    right: 20px;
+  }
+  
+  /* Container cho các dots */
+  .rectangle-4-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Dot */
+  .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Dot active */
+  .dot.active {
+    background-color: #5AA650;
+  }
+  
+  /* Rectangle 5 */
+  .rectangle-5 {
+    position: absolute;
+    width: 515px;
+    height: 432px;
+    left: 909px;
+    top: 253px;
+  }
+  
+  /* SVG làm nền */
+  .rectangle-5-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  /* Nội dung bên trong Rectangle 5 */
+  .rectangle-5-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  
+  /* Tiêu đề DỰ BÁO THỜI TIẾT */
+  .weather-title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #5AA650;
+    text-align: center;
+  }
+  
+  /* Dropdown chọn huyện và xã */
+  .weather-location {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  #district-select,
+  #commune-select {
+    padding: 3px 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #5AA650;
+    background-color: #FFFFFF;
+    color: #5AA650;
+    width: 120px;
+  }
+  
+  /* Thông tin thời tiết hiện tại */
+  .weather-current {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .weather-icon {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .weather-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .weather-temp {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #5AA650;
+  }
+  
+  .weather-condition {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #5AA650;
+  }
+  
+  .weather-humidity,
+  .weather-wind {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #5AA650;
+  }
+  
+  /* Dự báo 5 ngày */
+  .weather-forecast {
+    width: 100%;
+    max-height: 150px; /* Giới hạn chiều cao để hiển thị khoảng 3 ngày, nếu nhiều hơn sẽ cuộn */
+    overflow-y: auto; /* Bật thanh cuộn dọc */
+    display: flex;
+    flex-direction: column; /* Sắp xếp các ngày theo cột */
+    gap: 10px;
+    margin-top: 10px;
+    padding-right: 5px; /* Khoảng cách để thanh cuộn không che nội dung */
+  }
+  
+  /* Tùy chỉnh thanh cuộn */
+  .weather-forecast::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .weather-forecast::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .weather-forecast::-webkit-scrollbar-thumb {
+    background: #5AA650;
+    border-radius: 4px;
+  }
+  
+  .weather-forecast::-webkit-scrollbar-thumb:hover {
+    background: #4a8c42;
+  }
+  
+  /* Mỗi ngày dự báo */
+  .forecast-day {
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử trong ngày */
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0; /* Đường viền phân cách giữa các ngày */
+  }
+  
+  .forecast-day:last-child {
+    border-bottom: none; /* Bỏ đường viền cho ngày cuối cùng */
+  }
+  
+  .forecast-day-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #5AA650;
+    width: 50px; /* Đảm bảo các tên ngày thẳng hàng */
+    text-align: center;
+  }
+  
+  .forecast-icon {
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .forecast-temp {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #5AA650;
+    flex: 1; /* Chiếm phần còn lại của không gian */
+    text-align: center;
+  }
+  /* Media Queries for Responsiveness */
+  
+  /* Màn hình nhỏ hơn 1200px */
+  @media (max-width: 1200px) {
+    /* Frame 4 */
+    .frame-4 {
+        padding: 6px 10px;
+    }
+  
+    .frame-1 {
+        gap: 0px 15px;
+        max-width: 900px;
+    }
+  
+    .main-title {
+        font-size: 1.8rem;
+    }
+  
+    .nav-home,
+    .nav-monitoring-info,
+    .nav-statistics,
+    .nav-contact,
+    .nav-slope-movement {
+        font-size: 1.1rem;
+    }
+  
+    .search-input {
+        width: 12rem;
+    }
+  
+    .right-section {
+        max-width: 250px;
+    }
+  
+    /* Polygon 3 */
+    .polygon-3 {
+        width: 100%;
+        height: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 20px;
+    }
+  
+    /* Frame 2 */
+    .frame-2 {
+        width: 400px;
+        height: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 120px;
+        gap: 15px;
+    }
+  
+    .real-time-title {
+        width: 100%;
+        height: 50px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+  
+    .slope-movement-text {
+        width: 100%;
+        height: 16px;
+        font-size: 20px;
+        line-height: 24px;
+    }
+  
+    /* Frame 3 */
+    .frame-3 {
+        width: 600px;
+        height: 180px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100px;
+        padding: 8px;
+        gap: 8px;
+        border-radius: 25px;
+    }
+  
+    /* Rectangle 4 */
+    .rectangle-4 {
+        width: 600px;
+        height: 350px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 350px;
+    }
+  
+    .rectangle-4-content {
+        padding: 15px;
+        gap: 15px;
+    }
+  
+    .rectangle-4-title {
+        font-size: 28px;
+        line-height: 34px;
+    }
+  
+    .rectangle-4-slides {
+        height: 250px;
+    }
+  
+    .rectangle-4-slide {
+        font-size: 16px;
+        padding: 15px;
+    }
+  
+    .rectangle-4-prev,
+    .rectangle-4-next {
+        font-size: 20px;
+        padding: 8px;
+    }
+  
+    .rectangle-4-dots {
+        bottom: 15px;
+        gap: 8px;
+    }
+  
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+  
+    /* Rectangle 5 */
+    .rectangle-5 {
+        width: 400px;
+        height: 350px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 750px;
+    }
+  
+    .rectangle-5-content {
+        padding: 10px;
+        gap: 8px;
+    }
+  
+    .weather-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+  
+    #district-select,
+    #commune-select {
+        font-size: 12px;
+        width: 100px;
+    }
+  
+    .weather-current {
+        gap: 10px;
+    }
+  
+    .weather-icon {
+        width: 35px;
+        height: 35px;
+    }
+  
+    .weather-temp {
+        font-size: 18px;
+    }
+  
+    .weather-condition {
+        font-size: 12px;
+    }
+  
+    .weather-humidity,
+    .weather-wind {
+        font-size: 10px;
+    }
+  
+    .forecast-day-name {
+        font-size: 12px;
+    }
+  
+    .forecast-icon {
+        width: 25px;
+        height: 25px;
+    }
+  
+    .forecast-temp {
+        font-size: 10px;
+    }
+  }
+  
+  /* Màn hình nhỏ hơn 900px */
+  @media (max-width: 900px) {
+    /* Frame 4 */
+    .frame-4 {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+  
+    .frame-1 {
+        justify-content: center;
+        gap: 10px 15px;
+        max-width: 100%;
+    }
+  
+    .main-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+  
+    .nav-home,
+    .nav-monitoring-info,
+    .nav-statistics,
+    .nav-contact,
+    .nav-slope-movement {
+        font-size: 1rem;
+        text-align: center;
+    }
+  
+    .right-section {
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+    }
+  
+    .search-input {
+        width: 10rem;
+    }
+  
+    .search {
+        right: 0.3rem;
+    }
+  
+    /* Polygon 3 */
+    .polygon-3 {
+        height: 500px;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 15px;
+    }
+  
+    /* Frame 2 */
+    .frame-2 {
+        width: 90%;
+        max-width: 350px;
+        height: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80px;
+        gap: 10px;
+    }
+  
+    .real-time-title {
+        width: 100%;
+        height: 45px;
+        font-size: 24px;
+        line-height: 29px;
+    }
+  
+    .slope-movement-text {
+        width: 100%;
+        height: 14px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+  
+    /* Frame 3 */
+    .frame-3 {
+        width: 90%;
+        max-width: 500px;
+        height: 150px;
+        top: 480px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px;
+        gap: 6px;
+        border-radius: 20px;
+    }
+  
+    /* Rectangle 4 */
+    .rectangle-4 {
+        width: 90%;
+        max-width: 500px;
+        height: 300px;
+        top: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+  
+    .rectangle-4-content {
+        padding: 10px;
+        gap: 10px;
+    }
+  
+    .rectangle-4-title {
+        font-size: 24px;
+        line-height: 29px;
+    }
+  
+    .rectangle-4-slides {
+        height: 200px;
+    }
+  
+    .rectangle-4-slide {
+        font-size: 14px;
+        padding: 10px;
+    }
+  
+    .rectangle-4-prev,
+    .rectangle-4-next {
+        font-size: 18px;
+        padding: 6px;
+    }
+  
+    .rectangle-4-dots {
+        bottom: 10px;
+        gap: 6px;
+    }
+  
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+  
+    /* Rectangle 5 */
+    .rectangle-5 {
+        width: 90%;
+        max-width: 500px;
+        height: 300px;
+        top: 950px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+  
+    .rectangle-5-content {
+        padding: 8px;
+        gap: 6px;
+    }
+  
+    .weather-title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+  
+    #district-select,
+    #commune-select {
+        font-size: 10px;
+        width: 90px;
+    }
+  
+    .weather-current {
+        gap: 8px;
+    }
+  
+    .weather-icon {
+        width: 30px;
+        height: 30px;
+    }
+  
+    .weather-temp {
+        font-size: 16px;
+    }
+  
+    .weather-condition {
+        font-size: 10px;
+    }
+  
+    .weather-humidity,
+    .weather-wind {
+        font-size: 8px;
+    }
+  
+    .forecast-day-name {
+        font-size: 10px;
+    }
+  
+    .forecast-icon {
+        width: 20px;
+        height: 20px;
+    }
+  
+    .forecast-temp {
+        font-size: 8px;
+    }
+  }
+  
+  /* Màn hình nhỏ hơn 600px (điện thoại) */
+  @media (max-width: 600px) {
+    /* Frame 4 */
+    .frame-4 {
+        padding: 8px;
+        gap: 8px;
+    }
+  
+    .frame-1 {
+        gap: 8px 10px;
+    }
+  
+    .main-title {
+        font-size: 1.2rem;
+    }
+  
+    .nav-home,
+    .nav-monitoring-info,
+    .nav-statistics,
+    .nav-contact,
+    .nav-slope-movement {
+        font-size: 0.8rem;
+    }
+  
+    .search-input {
+        width: 8rem;
+        height: 1.1rem;
+        font-size: 0.7rem;
+    }
+  
+    .google-translate,
+    .user-male {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+  
+    .search {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+  
+    /* Polygon 3 */
+    .polygon-3 {
+        height: 400px;
+        top: 350px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+    }
+  
+    /* Frame 2 */
+    .frame-2 {
+        width: 90%;
+        max-width: 300px;
+        height: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 60px;
+        gap: 8px;
+    }
+  
+    .real-time-title {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        line-height: 24px;
+    }
+  
+    .slope-movement-text {
+        width: 100%;
+        height: 12px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+  
+    /* Frame 3 */
+    .frame-3 {
+        width: 90%;
+        max-width: 350px;
+        height: 120px;
+        top: 510px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px;
+        gap: 5px;
+        border-radius: 15px;
+    }
+  
+    /* Rectangle 4 */
+    .rectangle-4 {
+        width: 90%;
+        max-width: 350px;
+        height: 250px;
+        top: 650px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+  
+    .rectangle-4-content {
+        padding: 8px;
+        gap: 8px;
+    }
+  
+    .rectangle-4-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+  
+    .rectangle-4-slides {
+        height: 150px;
+    }
+  
+    .rectangle-4-slide {
+        font-size: 12px;
+        padding: 8px;
+    }
+  
+    .rectangle-4-prev,
+    .rectangle-4-next {
+        font-size: 16px;
+        padding: 5px;
+    }
+  
+    .rectangle-4-dots {
+        bottom: 8px;
+        gap: 5px;
+    }
+  
+    .dot {
+        width: 5px;
+        height: 5px;
+    }
+  
+    /* Rectangle 5 */
+    .rectangle-5 {
+        width: 90%;
+        max-width: 350px;
+        height: 250px;
+        top: 950px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+  
+    .rectangle-5-content {
+        padding: 6px;
+        gap: 5px;
+    }
+  
+    .weather-title {
+        font-size: 16px;
+        line-height: 20px;
+    }
+  
+    #district-select,
+    #commune-select {
+        font-size: 8px;
+        width: 80px;
+    }
+  
+    .weather-current {
+        gap: 6px;
+    }
+  
+    .weather-icon {
+        width: 25px;
+        height: 25px;
+    }
+  
+    .weather-temp {
+        font-size: 14px;
+    }
+  
+    .weather-condition {
+        font-size: 8px;
+    }
+  
+    .weather-humidity,
+    .weather-wind {
+        font-size: 7px;
+    }
+  
+    .forecast-day-name {
+        font-size: 8px;
+    }
+  
+    .forecast-icon {
+        width: 18px;
+        height: 18px;
+    }
+  
+    .forecast-temp {
+        font-size: 7px;
+    }
+  }
+  
+  
+  .rectangle-965 {
+    position: relative;
+    width: 889px;
+    height: 520px;
+  }
+  
+  .rectangle-965-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #map {
+    width: 100%;
+    height: 100%;
+    border-radius: 35px;
+  }
+  .rectangle-965{
+    position: absolute;
+    width: 799px;
+    height: 520px;
+    left: calc(50% - 889px/2 - 238.5px);
+    top: 221px; 
+  }
+  /* Group 4043 */
+  .group-4043 {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    left: 24px;
+    top: 54px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .ellipse-1 {
+    box-sizing: border-box;
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    left: 0;
+    top: 0;
+    background: #5CA13A;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+  }
+  
+  .group-4042 {
+    position: absolute;
+    width: 29.33px;
+    height: 22px;
+    left: 12px;
+    top: 16px;
+  }
+  
+  .vector {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Bản điều khiển */
+  .control-panel {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 358px;
+    height: 452px;
+    z-index: 11;
+  }
+  
+  .control-panel.active {
+    display: block;
+  }
+  
+  .control-panel svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .control-panel-content {
+    position: relative;
+    padding: 20px;
+    color: #333;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .control-panel-content h3 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .control-section {
+    margin-bottom: 20px;
+  }
+  
+  .control-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .control-section select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  
+  .control-section canvas {
+    margin-top: 10px;
+  }
