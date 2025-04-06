@@ -137,7 +137,7 @@ async function renderRectangle4() {
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Displacement X (mm)', data: accelDataRaw.slice(1).map(row => row[1]), borderColor: 'red', fill: false }
+                { label: 'Chuyển vị X (mm)', data: accelDataRaw.slice(1).map(row => row[4]), borderColor: 'red', fill: false }
             ]
         },
         options: {
@@ -190,7 +190,7 @@ async function renderRectangle4() {
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Velocity Z (mm/s)', data: accelDataRaw.slice(1).map(row => row[6]), borderColor: 'blue', fill: false }
+                { label: 'Vận tốc X (mm/s)', data: accelDataRaw.slice(1).map(row => row[3]), borderColor: 'blue', fill: false }
             ]
         },
         options: {
