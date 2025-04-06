@@ -127,10 +127,6 @@ async function renderRectangle4() {
             <td>${row[3]}</td>
             <td>${row[4]}</td>
             <td>${row[5]}</td>
-            <td>${row[6]}</td>
-            <td>${row[7]}</td>
-            <td>${row[8]}</td>
-            <td>${row[9]}</td>
         </tr>
     `).join('');
 
