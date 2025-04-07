@@ -1,0 +1,350 @@
+@media (max-width: 480px) {
+    .frame-3 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+      gap: 10px;
+      position: absolute;
+      width: 405px;
+      height: 224px;
+      left: 35%;
+      transform: translateX(7%);
+      top: 90px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      border-radius: 36px;
+      overflow: hidden;
+    }
+  
+    /* SVG trong slideshow */
+    .slideshow-svg {
+      width: 100%;
+      height: 100%;
+    }
+  
+    /* Rectangle 4 (About Us Section) */
+    .rectangle-4 {
+      position: absolute;
+      width: 57%; /* Thu nhỏ chiều rộng để nằm gọn trong .polygon-3 */
+      max-width: 90%; /* Đảm bảo không vượt quá khung của .polygon-3 */
+      height: 300px; /* Giảm chiều cao */
+      left: 32%;
+      transform: translateX(-55%); /* Căn giữa */
+      top: 150px; /* Tăng giá trị top để kéo xuống dưới */
+    }
+  
+    /* SVG làm nền */
+    .rectangle-4-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+  
+    /* Nội dung bên trong Rectangle 4 */
+    .rectangle-4-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px; /* Giảm padding */
+      gap: 8px; /* Giảm khoảng cách */
+      z-index: 1;
+    }
+  
+    /* Tiêu đề GIỚI THIỆU VỀ CHỨNG TÔI */
+    .rectangle-4-title {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 14px; /* Đồng bộ với .weather-title */
+      line-height: 18px; /* Đồng bộ với .weather-title */
+      color: #5AA650;
+      text-align: center;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+    }
+  
+    /* Container cho các slide */
+    .rectangle-4-slides {
+      width: 100%;
+      height: 200px; /* Giảm chiều cao */
+      position: relative;
+      overflow: hidden;
+    }
+  
+    /* Slide */
+    .rectangle-4-slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px; /* Giảm kích thước font */
+      color: #000000;
+      text-align: center;
+      padding: 8px; /* Giảm padding */
+    }
+  
+    /* Slide active */
+    .rectangle-4-slide.active {
+      opacity: 1;
+    }
+  
+    /* Nút điều hướng */
+    .rectangle-4-prev,
+    .rectangle-4-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 16px; /* Giảm kích thước font */
+      color: #5AA650;
+      cursor: pointer;
+      padding: 4px; /* Giảm padding */
+    }
+  
+    .rectangle-4-prev {
+      left: 8px; /* Giảm khoảng cách từ mép */
+    }
+  
+    .rectangle-4-next {
+      right: 8px; /* Giảm khoảng cách từ mép */
+    }
+  
+    /* Container cho các dots */
+    .rectangle-4-dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px; /* Giảm khoảng cách giữa các dots */
+      position: absolute;
+      bottom: 45px; /* Giảm khoảng cách từ đáy */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    /* Dot */
+    .dot {
+      width: 5px; /* Giảm kích thước dot */
+      height: 5px;
+      background-color: #FFFFFF;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    /* Dot active */
+    .dot.active {
+      background-color: #5AA650;
+    }
+  
+    /* Polygon 3 */
+    .polygon-3 {
+      position: relative;
+      width: 137%;
+      max-width: 1130px;
+      height: auto;
+      min-height: 480px;
+      margin: 0 auto;
+      top: 9px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1680 900" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M620.885 0C628.358 0 635.562 2.78915 641.087 7.82144L853.913 201.679C859.438 206.711 866.642 209.5 874.115 209.5H1410C1426.57 209.5 1440 222.931 1440 239.5V735C1440 751.569 1426.57 765 1410 765H30C13.4314 765 0 751.569 0 735V30C0 13.4315 13.4315 0 30 0H620.885Z" fill="%23F5F5F5"/></svg>') no-repeat center center;
+      background-size: cover;
+      border-radius: 30px;
+    }
+  
+    /* Rectangle 5 (Weather Forecast Section) */
+    .rectangle-5 {
+      position: absolute;
+      width: 45%; /* Thu nhỏ chiều rộng để vừa với khoảng trống bên phải .rectangle-4 */
+      max-width: 38%; /* Đảm bảo không vượt quá khoảng trống */
+      height: 250px; /* Giữ chiều cao */
+      left: 61%; /* Đặt bên phải .rectangle-4 */
+      transform: translateX(0); /* Không cần điều chỉnh thêm */
+      top: 174px; /* Đồng bộ với .rectangle-4 để nằm trên cùng hàng */
+    }
+  
+    /* SVG làm nền */
+    .rectangle-5-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+  
+    /* Nội dung bên trong Rectangle 5 */
+    .rectangle-5-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px; /* Giảm padding */
+      gap: 3px; /* Giảm khoảng cách */
+      z-index: 1;
+      box-sizing: border-box;
+    }
+  
+    /* Tiêu đề DỰ BÁO THỜI TIẾT */
+    .weather-title {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 14px; /* Đồng bộ với .rectangle-4-title */
+      line-height: 18px; /* Đồng bộ với .rectangle-4-title */
+      color: #5AA650;
+      text-align: center;
+      margin-top: -10px;
+    }
+  
+    /* Dropdown chọn huyện và xã */
+    .weather-location {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 21px; /* Giảm khoảng cách */
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+  
+    #district-select,
+    #commune-select {
+      padding: 1px 2px; /* Giảm padding */
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7px; /* Giảm kích thước font */
+      border-radius: 3px; /* Giảm border-radius */
+      border: 1px solid #5AA650;
+      background-color: #FFFFFF;
+      color: #5AA650;
+      width: 75px; /* Giảm chiều rộng */
+    }
+  
+    /* Thông tin thời tiết hiện tại */
+    .weather-current {
+      display: flex;
+      align-items: center;
+      gap: 6px; /* Giảm khoảng cách */
+      margin-top: 5px; /* Giảm margin-top */
+    }
+  
+    .weather-icon {
+      width: 18px; /* Giảm kích thước */
+      height: 18px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  
+    .weather-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1px; /* Giảm khoảng cách */
+    }
+  
+    .weather-temp {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; /* Giảm kích thước font */
+      font-weight: 700;
+      color: #5AA650;
+    }
+  
+    .weather-condition {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7px; /* Giảm kích thước font */
+      color: #5AA650;
+    }
+  
+    .weather-humidity,
+    .weather-wind {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 6px; /* Giảm kích thước font */
+      color: #5AA650;
+    }
+  
+    /* Dự báo 5 ngày */
+    .weather-forecast {
+      width: 100%;
+      max-height: 90px; /* Tăng chiều cao tối đa để chứa nội dung */
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3px; /* Giảm khoảng cách */
+      margin-top: 2px; /* Giảm margin-top */
+      padding-right: 1px; /* Giảm padding-right */
+    }
+  
+    /* Tùy chỉnh thanh cuộn */
+    .weather-forecast::-webkit-scrollbar {
+      width: 4px; /* Giảm chiều rộng thanh cuộn */
+    }
+  
+    .weather-forecast::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 2px;
+    }
+  
+    .weather-forecast::-webkit-scrollbar-thumb {
+      background: #5AA650;
+      border-radius: 2px;
+    }
+  
+    .weather-forecast::-webkit-scrollbar-thumb:hover {
+      background: #4a8c42;
+    }
+  
+    /* Mỗi ngày dự báo */
+    .forecast-day {
+      display: flex;
+      align-items: center;
+      gap: 3px; /* Giảm khoảng cách */
+      padding: 1px 0; /* Giảm padding */
+      border-bottom: 1px solid #e0e0e0;
+    }
+  
+    .forecast-day:last-child {
+      border-bottom: none;
+    }
+  
+    .forecast-day-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7px; /* Giảm kích thước font */
+      font-weight: 700;
+      color: #5AA650;
+      width: 25px; /* Giảm chiều rộng */
+      text-align: center;
+    }
+  
+    .forecast-icon {
+      width: 12px; /* Giảm kích thước */
+      height: 12px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  
+    .forecast-temp {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 6px; /* Giảm kích thước font */
+      color: #5AA650;
+      flex: 1;
+      text-align: center;
+    }
+  }
