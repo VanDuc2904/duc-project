@@ -14,7 +14,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 15px;
-  isolation: isolate;
   position: relative;
   width: 100%;
   max-width: 1400px;
@@ -29,7 +28,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  align-content: flex-start;
   padding: 0px;
   gap: 0px 20px;
   width: 100%;
@@ -38,7 +36,6 @@
   flex: none;
   order: 0;
   flex-grow: 1;
-  z-index: 0;
 }
 
 /* HỆ THỐNG QUAN TRẮC (Main Title) */
@@ -117,6 +114,25 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
+.nav-monitoring-webgis {
+  width: auto;
+  height: auto;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #5AA650;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
 /* Liên hệ (Contact Link) */
 .nav-contact {
   width: auto;
@@ -159,28 +175,25 @@
 .nav-monitoring-info,
 .nav-statistics,
 .nav-contact {
-  color: #5AA650; /* Màu mặc định cho tất cả các mục */
+  color: #5AA650;
 }
 
-/* Hiệu ứng hover */
 .nav-home:hover,
 .nav-monitoring-info:hover,
 .nav-statistics:hover,
 .nav-contact:hover {
-  color: #000000; /* Màu đen khi hover */
+  color: #000000;
   transform: scale(1.05);
 }
 
-/* Hiệu ứng active */
 .nav-home.active,
 .nav-monitoring-info.active,
 .nav-statistics.active,
 .nav-contact.active {
-  color: #000000 !important; /* Màu đen khi active */
+  color: #000000 !important;
   font-weight: 900;
 }
 
-/* Khi hover vào mục đang active, giữ màu đen */
 .nav-home.active:hover,
 .nav-monitoring-info.active:hover,
 .nav-statistics.active:hover,
@@ -213,9 +226,6 @@
   font-size: 0.9rem;
   color: #333;
   outline: none;
-  margin-left: 0; /* đảm bảo không có margin trái */
-  /* hoặc dùng transform để di chuyển */
-  transform: translateX(-50%); /* di chuyển sang trái 50% chiều rộng của chính nó */
 }
 
 .search-input::placeholder {
@@ -233,9 +243,6 @@
   flex: none;
   order: 2;
   flex-grow: 0;
-  z-index: 2;
-  position: absolute;
-  right: 4rem;
 }
 
 /* User Male Icon */
@@ -249,9 +256,6 @@
   flex: none;
   order: 3;
   flex-grow: 0;
-  z-index: 3;
-  position: absolute;
-  right: 5.5rem;
 }
 
 /* Search Icon (inside the search input) */
@@ -265,22 +269,18 @@
   flex: none;
   order: 4;
   flex-grow: 0;
-  z-index: 4;
-  position: absolute;
-  right: 10rem;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 /* Polygon 3 */
 .polygon-3 {
-  position: absolute;
-  width: 1440px;
-  height: 765px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 129px;
-  background: url('data:image/svg+xml;utf8,<svg width="1440" height="765" viewBox="0 0 1440 765" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M620.885 0C628.358 0 635.562 2.78915 641.087 7.82144L853.913 201.679C859.438 206.711 866.642 209.5 874.115 209.5H1410C1426.57 209.5 1440 222.931 1440 239.5V735C1440 751.569 1426.57 765 1410 765H30C13.4314 765 0 751.569 0 735V30C0 13.4315 13.4315 0 30 0H620.885Z" fill="%23F5F5F5"/></svg>') no-repeat center center;
+  position: relative;
+  width: 100%;
+  max-width: 1350px;
+  height: auto;
+  min-height: 765px;
+  margin: 0 auto;
+  top: 85px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M620.885 0C628.358 0 635.562 2.78915 641.087 7.82144L853.913 201.679C859.438 206.711 866.642 209.5 874.115 209.5H1410C1426.57 209.5 1440 222.931 1440 239.5V735C1440 751.569 1426.57 765 1410 765H30C13.4314 765 0 751.569 0 735V30C0 13.4315 13.4315 0 30 0H620.885Z" fill="%23F5F5F5"/></svg>') no-repeat center center;
   background-size: cover;
   border-radius: 30px;
 }
@@ -348,11 +348,11 @@
   padding: 10px;
   gap: 10px;
   position: absolute;
-  width: 802px;
+  width: 745px;
   height: 224px;
   left: 50%;
   transform: translateX(-8%);
-  top: 110px;
+  top: 125px;
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -371,7 +371,7 @@
   position: absolute;
   width: 781px;
   height: 432px;
-  left: 79px;
+  left: 6px;
   top: 253px;
 }
 
@@ -494,7 +494,7 @@
   position: absolute;
   width: 515px;
   height: 432px;
-  left: 909px;
+  left: 809px;
   top: 253px;
 }
 
@@ -507,6 +507,7 @@
   height: 100%;
   z-index: 0;
 }
+
 /* Nội dung bên trong Rectangle 5 */
 .rectangle-5-content {
   position: relative;
@@ -598,13 +599,13 @@
 /* Dự báo 5 ngày */
 .weather-forecast {
   width: 100%;
-  max-height: 150px; /* Giới hạn chiều cao để hiển thị khoảng 3 ngày, nếu nhiều hơn sẽ cuộn */
-  overflow-y: auto; /* Bật thanh cuộn dọc */
+  max-height: 150px;
+  overflow-y: auto;
   display: flex;
-  flex-direction: column; /* Sắp xếp các ngày theo cột */
+  flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-  padding-right: 5px; /* Khoảng cách để thanh cuộn không che nội dung */
+  padding-right: 5px;
 }
 
 /* Tùy chỉnh thanh cuộn */
@@ -629,14 +630,14 @@
 /* Mỗi ngày dự báo */
 .forecast-day {
   display: flex;
-  align-items: center; /* Căn giữa các phần tử trong ngày */
-  gap: 10px; /* Khoảng cách giữa các phần tử */
+  align-items: center;
+  gap: 10px;
   padding: 5px 0;
-  border-bottom: 1px solid #e0e0e0; /* Đường viền phân cách giữa các ngày */
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .forecast-day:last-child {
-  border-bottom: none; /* Bỏ đường viền cho ngày cuối cùng */
+  border-bottom: none;
 }
 
 .forecast-day-name {
@@ -644,7 +645,7 @@
   font-size: 14px;
   font-weight: 700;
   color: #5AA650;
-  width: 50px; /* Đảm bảo các tên ngày thẳng hàng */
+  width: 50px;
   text-align: center;
 }
 
@@ -660,14 +661,14 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   color: #5AA650;
-  flex: 1; /* Chiếm phần còn lại của không gian */
+  flex: 1;
   text-align: center;
 }
+
 /* Media Queries for Responsiveness */
 
 /* Màn hình nhỏ hơn 1200px */
 @media (max-width: 1200px) {
-  /* Frame 4 */
   .frame-4 {
       padding: 6px 10px;
   }
@@ -697,58 +698,53 @@
       max-width: 250px;
   }
 
-  /* Polygon 3 */
   .polygon-3 {
       width: 100%;
-      height: 600px;
-      left: 50%;
-      transform: translateX(-50%);
+      min-height: 600px;
+      top: 60px;
       border-radius: 20px;
   }
 
-  /* Frame 2 */
   .frame-2 {
       width: 400px;
       height: 100px;
       left: 50%;
       transform: translateX(-50%);
-      top: 120px;
+      top: 20px;
       gap: 15px;
   }
 
   .real-time-title {
-      width: 100%;
       height: 50px;
       font-size: 28px;
       line-height: 34px;
   }
 
   .slope-movement-text {
-      width: 100%;
       height: 16px;
       font-size: 20px;
       line-height: 24px;
   }
 
-  /* Frame 3 */
   .frame-3 {
-      width: 600px;
+      width: 90%;
+      max-width: 600px;
       height: 180px;
       left: 50%;
       transform: translateX(-50%);
-      top: 100px;
+      top: 120px;
       padding: 8px;
       gap: 8px;
       border-radius: 25px;
   }
 
-  /* Rectangle 4 */
   .rectangle-4 {
-      width: 600px;
+      width: 90%;
+      max-width: 600px;
       height: 350px;
       left: 50%;
       transform: translateX(-50%);
-      top: 350px;
+      top: 320px;
   }
 
   .rectangle-4-content {
@@ -786,13 +782,13 @@
       height: 8px;
   }
 
-  /* Rectangle 5 */
   .rectangle-5 {
-      width: 400px;
+      width: 90%;
+      max-width: 400px;
       height: 350px;
       left: 50%;
       transform: translateX(-50%);
-      top: 750px;
+      top: 700px;
   }
 
   .rectangle-5-content {
@@ -849,17 +845,18 @@
 
 /* Màn hình nhỏ hơn 900px */
 @media (max-width: 900px) {
-  /* Frame 4 */
   .frame-4 {
       flex-direction: column;
       padding: 10px;
       gap: 10px;
+      min-height: 120px; /* Đảm bảo chiều cao tối thiểu cho menu */
   }
 
   .frame-1 {
       justify-content: center;
       gap: 10px 15px;
       max-width: 100%;
+      flex-wrap: wrap;
   }
 
   .main-title {
@@ -880,56 +877,49 @@
       justify-content: center;
       width: 100%;
       max-width: 100%;
+      display: flex;
+      gap: 8px;
   }
 
   .search-input {
-      width: 10rem;
+      width: 80%;
+      max-width: 200px;
+      height: 1.5rem;
+      font-size: 0.9rem;
   }
 
+  .google-translate,
+  .user-male,
   .search {
-      right: 0.3rem;
+      display: block;
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
   }
 
-  /* Polygon 3 */
   .polygon-3 {
-      height: 500px;
-      top: 300px;
-      left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      min-height: 600px; /* Tăng chiều cao để chứa toàn bộ nội dung */
+      top: 130px; /* Điều chỉnh top để tránh chồng lấn với menu */
       border-radius: 15px;
   }
 
-  /* Frame 2 */
   .frame-2 {
       width: 90%;
       max-width: 350px;
       height: 90px;
       left: 50%;
       transform: translateX(-50%);
-      top: 80px;
+      top: 10px;
       gap: 10px;
   }
 
-  .real-time-title {
-      width: 100%;
-      height: 45px;
-      font-size: 24px;
-      line-height: 29px;
-  }
-
-  .slope-movement-text {
-      width: 100%;
-      height: 14px;
-      font-size: 18px;
-      line-height: 22px;
-  }
-
-  /* Frame 3 */
   .frame-3 {
       width: 90%;
       max-width: 500px;
       height: 150px;
-      top: 480px;
+      top: 100px;
       left: 50%;
       transform: translateX(-50%);
       padding: 6px;
@@ -937,304 +927,21 @@
       border-radius: 20px;
   }
 
-  /* Rectangle 4 */
   .rectangle-4 {
       width: 90%;
       max-width: 500px;
       height: 300px;
-      top: 600px;
+      top: 260px;
       left: 50%;
       transform: translateX(-50%);
   }
 
-  .rectangle-4-content {
-      padding: 10px;
-      gap: 10px;
-  }
-
-  .rectangle-4-title {
-      font-size: 24px;
-      line-height: 29px;
-  }
-
-  .rectangle-4-slides {
-      height: 200px;
-  }
-
-  .rectangle-4-slide {
-      font-size: 14px;
-      padding: 10px;
-  }
-
-  .rectangle-4-prev,
-  .rectangle-4-next {
-      font-size: 18px;
-      padding: 6px;
-  }
-
-  .rectangle-4-dots {
-      bottom: 10px;
-      gap: 6px;
-  }
-
-  .dot {
-      width: 6px;
-      height: 6px;
-  }
-
-  /* Rectangle 5 */
   .rectangle-5 {
       width: 90%;
       max-width: 500px;
       height: 300px;
-      top: 950px;
+      top: 580px;
       left: 50%;
       transform: translateX(-50%);
-  }
-
-  .rectangle-5-content {
-      padding: 8px;
-      gap: 6px;
-  }
-
-  .weather-title {
-      font-size: 18px;
-      line-height: 22px;
-  }
-
-  #district-select,
-  #commune-select {
-      font-size: 10px;
-      width: 90px;
-  }
-
-  .weather-current {
-      gap: 8px;
-  }
-
-  .weather-icon {
-      width: 30px;
-      height: 30px;
-  }
-
-  .weather-temp {
-      font-size: 16px;
-  }
-
-  .weather-condition {
-      font-size: 10px;
-  }
-
-  .weather-humidity,
-  .weather-wind {
-      font-size: 8px;
-  }
-
-  .forecast-day-name {
-      font-size: 10px;
-  }
-
-  .forecast-icon {
-      width: 20px;
-      height: 20px;
-  }
-
-  .forecast-temp {
-      font-size: 8px;
-  }
-}
-
-/* Màn hình nhỏ hơn 600px (điện thoại) */
-@media (max-width: 600px) {
-  /* Frame 4 */
-  .frame-4 {
-      padding: 8px;
-      gap: 8px;
-  }
-
-  .frame-1 {
-      gap: 8px 10px;
-  }
-
-  .main-title {
-      font-size: 1.2rem;
-  }
-
-  .nav-home,
-  .nav-monitoring-info,
-  .nav-statistics,
-  .nav-contact,
-  .nav-slope-movement {
-      font-size: 0.8rem;
-  }
-
-  .search-input {
-      width: 8rem;
-      height: 1.1rem;
-      font-size: 0.7rem;
-  }
-
-  .google-translate,
-  .user-male {
-      width: 0.8rem;
-      height: 0.8rem;
-  }
-
-  .search {
-      width: 0.6rem;
-      height: 0.6rem;
-  }
-
-  /* Polygon 3 */
-  .polygon-3 {
-      height: 400px;
-      top: 350px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 10px;
-  }
-
-  /* Frame 2 */
-  .frame-2 {
-      width: 90%;
-      max-width: 300px;
-      height: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 60px;
-      gap: 8px;
-  }
-
-  .real-time-title {
-      width: 100%;
-      height: 40px;
-      font-size: 20px;
-      line-height: 24px;
-  }
-
-  .slope-movement-text {
-      width: 100%;
-      height: 12px;
-      font-size: 16px;
-      line-height: 20px;
-  }
-
-  /* Frame 3 */
-  .frame-3 {
-      width: 90%;
-      max-width: 350px;
-      height: 120px;
-      top: 510px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 5px;
-      gap: 5px;
-      border-radius: 15px;
-  }
-
-  /* Rectangle 4 */
-  .rectangle-4 {
-      width: 90%;
-      max-width: 350px;
-      height: 250px;
-      top: 650px;
-      left: 50%;
-      transform: translateX(-50%);
-  }
-
-  .rectangle-4-content {
-      padding: 8px;
-      gap: 8px;
-  }
-
-  .rectangle-4-title {
-      font-size: 20px;
-      line-height: 24px;
-  }
-
-  .rectangle-4-slides {
-      height: 150px;
-  }
-
-  .rectangle-4-slide {
-      font-size: 12px;
-      padding: 8px;
-  }
-
-  .rectangle-4-prev,
-  .rectangle-4-next {
-      font-size: 16px;
-      padding: 5px;
-  }
-
-  .rectangle-4-dots {
-      bottom: 8px;
-      gap: 5px;
-  }
-
-  .dot {
-      width: 5px;
-      height: 5px;
-  }
-
-  /* Rectangle 5 */
-  .rectangle-5 {
-      width: 90%;
-      max-width: 350px;
-      height: 250px;
-      top: 950px;
-      left: 50%;
-      transform: translateX(-50%);
-  }
-
-  .rectangle-5-content {
-      padding: 6px;
-      gap: 5px;
-  }
-
-  .weather-title {
-      font-size: 16px;
-      line-height: 20px;
-  }
-
-  #district-select,
-  #commune-select {
-      font-size: 8px;
-      width: 80px;
-  }
-
-  .weather-current {
-      gap: 6px;
-  }
-
-  .weather-icon {
-      width: 25px;
-      height: 25px;
-  }
-
-  .weather-temp {
-      font-size: 14px;
-  }
-
-  .weather-condition {
-      font-size: 8px;
-  }
-
-  .weather-humidity,
-  .weather-wind {
-      font-size: 7px;
-  }
-
-  .forecast-day-name {
-      font-size: 8px;
-  }
-
-  .forecast-icon {
-      width: 18px;
-      height: 18px;
-  }
-
-  .forecast-temp {
-      font-size: 7px;
   }
 }
