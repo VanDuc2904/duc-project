@@ -16,7 +16,63 @@ navLinks.forEach(link => {
         link.classList.add('active');
     }
 });
+// Thay đổi SVG cho Frame 3
+let svgPath = document.querySelector('#svg-path');
+const patterns = ['pattern0_1', 'pattern0_2', 'pattern0_3'];
+let currentPatternIndex = 0;
 
+// Hàm kiểm tra và thay đổi SVG của Frame 3 dựa trên kích thước màn hình
+function updateFrame3SVG() {
+    const frame3 = document.querySelector('.frame-3');
+    const isMobile = window.innerWidth <= 480;
+
+    if (isMobile) {
+        frame3.innerHTML = `
+            <svg class="slideshow-svg" width="315" height="97" viewBox="0 0 315 97" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path id="svg-path" d="M3.08463 16.7025C-2.72369 10.2712 1.84008 0 10.506 0H305C310.523 0 315 4.47715 315 10V87C315 92.5229 310.523 97 305 97H80.0475C77.2186 97 74.5221 95.8019 72.6261 93.7025L3.08463 16.7025Z" fill="url(#pattern0_1)"/>
+                <defs>
+                    <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_1" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <pattern id="pattern0_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_2" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <!-- Các hình ảnh -->
+                    <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
+                    <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
+                    <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
+                </defs>
+            </svg>
+        `;
+    } else {
+        frame3.innerHTML = `
+            <svg class="slideshow-svg" width="802" height="214" viewBox="0 0 792 214" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path id="svg-path" d="M68.0397 63.7456C47.3517 44.5882 60.9068 10 89.1024 10H761C778.121 10 792 23.8792 792 41V173C792 190.121 778.121 204 761 204H231.649C223.839 204 216.317 201.052 210.586 195.746L68.0397 63.7456Z" fill="url(#pattern0_1)"/>
+                <defs>
+                    <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_1" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <pattern id="pattern0_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_2" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <!-- Các hình ảnh -->
+                    <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
+                    <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
+                    <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
+                </defs>
+            </svg>
+        `;
+    }
+
+    // Cập nhật lại svgPath sau khi thay đổi SVG
+    svgPath = document.querySelector('#svg-path');
+}
 // Slideshow cho Frame 3
 const svgPath = document.querySelector('#svg-path');
 const patterns = ['pattern0_1', 'pattern0_2', 'pattern0_3'];
