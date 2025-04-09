@@ -12,10 +12,125 @@ navLinks.forEach(link => {
     }
 });
 
-// Slideshow cho Frame 3
-const svgPath = document.querySelector('#svg-path');
+// Thay đổi SVG cho Frame 3
+let svgPath = document.querySelector('#svg-path');
 const patterns = ['pattern0_1', 'pattern0_2', 'pattern0_3'];
 let currentPatternIndex = 0;
+
+// Hàm kiểm tra và thay đổi SVG của Frame 3 dựa trên kích thước màn hình
+function updateFrame3SVG() {
+    const frame3 = document.querySelector('.frame-3');
+    const isMobile = window.innerWidth <= 480;
+
+    if (isMobile) {
+        frame3.innerHTML = `
+            <svg class="slideshow-svg" width="315" height="97" viewBox="0 0 315 97" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path id="svg-path" d="M3.08463 16.7025C-2.72369 10.2712 1.84008 0 10.506 0H305C310.523 0 315 4.47715 315 10V87C315 92.5229 310.523 97 305 97H80.0475C77.2186 97 74.5221 95.8019 72.6261 93.7025L3.08463 16.7025Z" fill="url(#pattern0_1)"/>
+                <defs>
+                    <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_1" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <pattern id="pattern0_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_2" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00421392 0 -0.538731)"/>
+                    </pattern>
+                    <!-- Các hình ảnh -->
+                    <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
+                    <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
+                    <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
+                </defs>
+            </svg>
+        `;
+    } else {
+        frame3.innerHTML = `
+            <svg class="slideshow-svg" width="802" height="214" viewBox="0 0 792 214" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path id="svg-path" d="M68.0397 63.7456C47.3517 44.5882 60.9068 10 89.1024 10H761C778.121 10 792 23.8792 792 41V173C792 190.121 778.121 204 761 204H231.649C223.839 204 216.317 201.052 210.586 195.746L68.0397 63.7456Z" fill="url(#pattern0_1)"/>
+                <defs>
+                    <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_1" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <pattern id="pattern0_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_2" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <pattern id="pattern0_3" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_3" transform="matrix(0.00125 0 0 0.00503866 0 -0.74203)"/>
+                    </pattern>
+                    <!-- Các hình ảnh -->
+                    <image id="image0_1" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB.jpg"/>
+                    <image id="image0_2" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/HB2.jpg"/>
+                    <image id="image0_3" width="800" height="493" preserveAspectRatio="none" xlink:href="/img/Nhieu_kv.jpg"/>
+                </defs>
+            </svg>
+        `;
+    }
+
+    // Cập nhật lại svgPath sau khi thay đổi SVG
+    svgPath = document.querySelector('#svg-path');
+}
+
+// Hàm kiểm tra và thay đổi SVG của Rectangle 4 dựa trên kích thước màn hình
+function updateRectangle4SVG() {
+    const rectangle4 = document.querySelector('.rectangle-4');
+    const isMobile = window.innerWidth <= 480;
+
+    // Tìm SVG hiện tại trong rectangle-4
+    let rectangleSvg = rectangle4.querySelector('.rectangle-4-bg');
+    if (!rectangleSvg) {
+        // Nếu không tìm thấy SVG, thêm một SVG mặc định (SVG cũ)
+        rectangleSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        rectangleSvg.classList.add('rectangle-4-bg');
+        rectangle4.insertBefore(rectangleSvg, rectangle4.firstChild);
+    }
+
+    if (isMobile) {
+        rectangleSvg.setAttribute('width', '378');
+        rectangleSvg.setAttribute('height', '428');
+        rectangleSvg.setAttribute('viewBox', '0 0 378 428');
+        rectangleSvg.innerHTML = `
+            <rect width="378" height="428" rx="29" fill="#EFEFEF"/>
+        `;
+    } else {
+        rectangleSvg.setAttribute('width', '781');
+        rectangleSvg.setAttribute('height', '432');
+        rectangleSvg.setAttribute('viewBox', '0 0 781 432');
+        rectangleSvg.innerHTML = `
+            <rect width="781" height="432" rx="15" fill="#EFEFEF"/>
+        `;
+    }
+}
+
+// Hàm kiểm tra và thay đổi SVG của Rectangle 5 dựa trên kích thước màn hình
+function updateRectangle5SVG() {
+    const rectangle5 = document.querySelector('.rectangle-5');
+    const isMobile = window.innerWidth <= 480;
+
+    // Tìm SVG hiện tại trong rectangle-5
+    let rectangleSvg = rectangle5.querySelector('.rectangle-5-bg');
+    if (!rectangleSvg) {
+        // Nếu không tìm thấy SVG, thêm một SVG mặc định (SVG cũ)
+        rectangleSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        rectangleSvg.classList.add('rectangle-5-bg');
+        rectangle5.insertBefore(rectangleSvg, rectangle5.firstChild);
+    }
+
+    if (isMobile) {
+        rectangleSvg.setAttribute('width', '368');
+        rectangleSvg.setAttribute('height', '190');
+        rectangleSvg.setAttribute('viewBox', '0 0 368 190');
+        rectangleSvg.innerHTML = `
+            <rect width="368" height="190" rx="31" fill="#EFEFEF"/>
+        `;
+    } else {
+        rectangleSvg.setAttribute('width', '515');
+        rectangleSvg.setAttribute('height', '432');
+        rectangleSvg.setAttribute('viewBox', '0 0 515 432');
+        rectangleSvg.innerHTML = `
+            <rect width="515" height="432" rx="15" fill="#EFEFEF"/>
+        `;
+    }
+}
 
 // Kiểm tra xem hình ảnh có tải được không
 function checkImageLoad(imageUrl) {
@@ -56,6 +171,11 @@ function showNextPattern() {
 
 // Khởi tạo slideshow
 (async () => {
+    // Cập nhật SVG trước khi chạy slideshow
+    updateFrame3SVG();
+    updateRectangle4SVG();
+    updateRectangle5SVG(); // Thêm hàm cập nhật SVG cho Rectangle 5
+
     if (svgPath) {
         const imagesLoaded = await initializeSlideshow();
         if (imagesLoaded) {
@@ -66,6 +186,20 @@ function showNextPattern() {
         }
     }
 })();
+
+// Xử lý khi thay đổi kích thước màn hình
+window.addEventListener('resize', () => {
+    updateFrame3SVG();
+    updateRectangle4SVG();
+    updateRectangle5SVG(); // Thêm hàm cập nhật SVG cho Rectangle 5
+    // Khởi động lại slideshow sau khi thay đổi SVG
+    if (svgPath) {
+        const imagesLoaded = initializeSlideshow();
+        if (imagesLoaded) {
+            showNextPattern();
+        }
+    }
+});
 
 // Slideshow cho Rectangle 4
 const slides = document.querySelectorAll('.rectangle-4-slide');
