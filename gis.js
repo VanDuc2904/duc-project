@@ -209,7 +209,7 @@ window.initMap = async function () {
     const marker1 = new google.maps.Marker({
         position: { lat: 20.995536, lng: 105.808129 },
         map: map,
-        title: `YB-TQLM-1`, // Đặt tên điểm là YB-TQLM-1
+        title: `Thử nghiệm`, // Đặt tên điểm là YB-TQLM-1
         icon: redMarkerIcon // Sử dụng hình ảnh tùy chỉnh cho marker đỏ
     });
     console.log("Marker 1 created:", marker1); // Debug: Check if marker is created
