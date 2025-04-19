@@ -128,7 +128,7 @@ async function renderRectangle4() {
         <tr>
             <td>${row[0]}</td>
             <td>${formatMPUNumber(row[1], 2)}</td>
-            <td>${formatMPUNumber(row[2], 0)}</td>
+            <td>${formatMPUNumber(row[2], 3)}</td>
             <td>${formatMPUNumber(row[3], 3)}</td>
             <td>${formatMPUNumber(row[4], 3)}</td>
             <td>${row[5] || ''}</td>
