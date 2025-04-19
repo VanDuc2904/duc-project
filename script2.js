@@ -57,7 +57,6 @@ function showNextPattern() {
         }
     }
 })();
-
 // Lấy dữ liệu từ Google Sheets
 const SPREADSHEET_ID = '1416C6GSyUnI4G4nGVipU4XAeEZS1PIkagu07BRnk3rs'; // MPU9250
 const SPREADSHEET_ID_RAIN = '1qThn_QQ0RSoUtsBuiC3_BAoEtq5EctXF5tweQuB3TxA'; // Rain
@@ -101,6 +100,11 @@ function formatDateTime(date) {
     return date.toLocaleString('vi-VN', options).replace(/,/, '');
 }
 
+// Hàm định dạng số với 3 chữ số thập phân
+function formatNumber(value) {
+    return parseFloat(value).toFixed(3);
+}
+
 // Xử lý và hiển thị dữ liệu cho Rectangle-4
 async function renderRectangle4() {
     const accelDataRaw = await fetchData(API_URL);
@@ -121,10 +125,10 @@ async function renderRectangle4() {
     accelTableBody.innerHTML = accelData.map(row => `
         <tr>
             <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
+            <td>${formatNumber(row[1])}</td>
+            <td>${formatNumber(row[2])}</td>
+            <td>${formatNumber(row[3])}</td>
+            <td>${formatNumber(row[4])}</td>
             <td>${row[5]}</td>
         </tr>
     `).join('');
@@ -136,19 +140,26 @@ async function renderRectangle4() {
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Chuyển vị X (mm)', data: accelDataRaw.slice(1).map(row => row[4]), borderColor: 'red', fill: false }
+                { label: 'Chuyển vị X (mm)', data: accelDataRaw.slice(规模: 1).map(row => parseFloat(row[4])), borderColor: 'red', fill: false }
             ]
         },
         options: {
             responsive: true,
             scales: {
                 x: { title: { display: true, text: 'Thời gian' } },
-                y: { title: { display: true, text: 'Displacement X (mm)' } }
+                y: { 
+                    title: { display: true, text: 'Displacement X (mm)' },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toFixed(3); // Định dạng 3 chữ số thập phân trên trục Y
+                        }
+                    }
+                }
             }
         }
     });
 
-    // Slide 3: Bảng thông tin mưa
+    // Slide 3: Bảng thông tin mưa (không thay đổi)
     const rainData = rainDataRaw.slice(1).slice(-5); // Lấy 5 dòng cuối
     const rainTableBody = document.getElementById('rain-table-body');
     rainTableBody.innerHTML = rainData.map(row => `
@@ -159,7 +170,7 @@ async function renderRectangle4() {
         </tr>
     `).join('');
 
-    // Slide 4: Biểu đồ mưa
+    // Slide 4: Biểu đồ mưa (không thay đổi)
     const rainChartCtx = document.getElementById('rain-chart').getContext('2d');
     const rainDataSliced = rainDataRaw.slice(1);
     const currentRainData = rainDataSliced.map(row => parseFloat(row[3]) || 0);
@@ -189,14 +200,21 @@ async function renderRectangle4() {
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Vận tốc X (mm/s)', data: accelDataRaw.slice(1).map(row => row[3]), borderColor: 'blue', fill: false }
+                { label: 'Vận tốc X (mm/s)', data: accelDataRaw.slice(1).map(row => parseFloat(row[3])), borderColor: 'blue', fill: false }
             ]
         },
         options: {
             responsive: true,
             scales: {
                 x: { title: { display: true, text: 'Thời gian' } },
-                y: { title: { display: true, text: 'Velocity Z (mm/s)' } }
+                y: { 
+                    title: { display: true, text: 'Velocity Z (mm/s)' },
+                    ticks: {
+                        callback: function(value) {
+                            return value.toFixed(3); // Định dạng 3 chữ số thập phân trên trục Y
+                        }
+                    }
+                }
             }
         }
     });
@@ -228,7 +246,6 @@ async function renderRectangle4() {
 
     showSlide(0); // Hiển thị slide đầu tiên
 }
-
 // Dự báo thời tiết cho Rectangle 5
 const districtSelect = document.querySelector('#district-select');
 const communeSelect = document.querySelector('#commune-select');
