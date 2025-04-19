@@ -16,6 +16,7 @@ navLinks.forEach(link => {
         link.classList.add('active');
     }
 });
+
 // Slideshow cho Frame 3
 const svgPath = document.querySelector('#svg-path');
 const patterns = ['pattern0_1', 'pattern0_2', 'pattern0_3'];
@@ -101,6 +102,11 @@ function formatDateTime(date) {
     return date.toLocaleString('vi-VN', options).replace(/,/, '');
 }
 
+// Hàm định dạng số theo chuẩn trên Google Sheets
+function formatMPUNumber(value, decimals) {
+    return parseFloat(value).toFixed(decimals);
+}
+
 // Xử lý và hiển thị dữ liệu cho Rectangle-4
 async function renderRectangle4() {
     const accelDataRaw = await fetchData(API_URL);
@@ -121,11 +127,11 @@ async function renderRectangle4() {
     accelTableBody.innerHTML = accelData.map(row => `
         <tr>
             <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${row[4]}</td>
-            <td>${row[5]}</td>
+            <td>${formatMPUNumber(row[1], 2)}</td>
+            <td>${formatMPUNumber(row[2], 0)}</td>
+            <td>${formatMPUNumber(row[3], 3)}</td>
+            <td>${formatMPUNumber(row[4], 3)}</td>
+            <td>${row[5] || ''}</td>
         </tr>
     `).join('');
 
@@ -136,14 +142,21 @@ async function renderRectangle4() {
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Chuyển vị X (mm)', data: accelDataRaw.slice(1).map(row => row[4]), borderColor: 'red', fill: false }
+                { label: 'Chuyển vị X (mm)', data: accelDataRaw.slice(1).map(row => parseFloat(row[4])), borderColor: 'red', fill: false }
             ]
         },
         options: {
             responsive: true,
             scales: {
                 x: { title: { display: true, text: 'Thời gian' } },
-                y: { title: { display: true, text: 'Displacement X (mm)' } }
+                y: { 
+                    title: { display: true, text: 'Displacement X (mm)' },
+                    ticks: {
+                        callback: function(value) {
+                            return formatMPUNumber(value, 3); // 3 chữ số thập phân trên trục Y
+                        }
+                    }
+                }
             }
         }
     });
@@ -182,21 +195,28 @@ async function renderRectangle4() {
         }
     });
 
-    // Slide 5: Biểu đồ Velocity Z
+    // Slide 5: Biểu đồ Velocity X
     const velZChartCtx = document.getElementById('velZ-chart').getContext('2d');
     new Chart(velZChartCtx, {
         type: 'line',
         data: {
             labels: accelDataRaw.slice(1).map(row => row[0]), // Thời gian
             datasets: [
-                { label: 'Vận tốc X (mm/s)', data: accelDataRaw.slice(1).map(row => row[3]), borderColor: 'blue', fill: false }
+                { label: 'Vận tốc X (mm/s)', data: accelDataRaw.slice(1).map(row => parseFloat(row[3])), borderColor: 'blue', fill: false }
             ]
         },
         options: {
             responsive: true,
             scales: {
                 x: { title: { display: true, text: 'Thời gian' } },
-                y: { title: { display: true, text: 'Velocity Z (mm/s)' } }
+                y: { 
+                    title: { display: true, text: 'Velocity X (mm/s)' },
+                    ticks: {
+                        callback: function(value) {
+                            return formatMPUNumber(value, 3); // 3 chữ số thập phân trên trục Y
+                        }
+                    }
+                }
             }
         }
     });
